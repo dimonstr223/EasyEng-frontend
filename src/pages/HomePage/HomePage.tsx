@@ -1,9 +1,9 @@
 import React from 'react'
 
-import image from '../../assets/img/header-logo.svg'
 import arrow from '../../assets/img/arrow.svg'
 
 import style from './HomePage.module.scss'
+import Card from '../../components/Card/Card'
 
 const HomePage = () => {
 	return (
@@ -23,12 +23,7 @@ const HomePage = () => {
 						alt='arrow'
 					/>
 				</div>
-				<div className={style.card}>
-					<h3 className={style.cardTitle}>Green bird</h3>
-					<div className={style.imgWrapper}>
-						<img src={image} width={150} alt='' />
-					</div>
-				</div>
+				<Card />
 			</div>
 			<button className={style.getStartButton}>Get started</button>
 		</>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import headerLogo from '../assets/img/header-logo.svg'
+import headerLogo from '../../assets/img/header-logo.svg'
 
 import style from './Header.module.scss'
 
