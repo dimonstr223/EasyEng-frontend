@@ -10,8 +10,8 @@ const HomePage = () => {
 		<>
 			<h1 className={style.title}>Welcome</h1>
 			<p className={style.text}>
-				to <span>EasyEng</span>. This app will help you learn English words.
-				Create your own flipcards cards and enjoy learning!
+				to <span>EasyLang</span>. This app will help you learn foreign words.
+				Create your own flipcards and enjoy learning!
 			</p>
 			<div className={style.example}>
 				<div className={style.wrapper}>
