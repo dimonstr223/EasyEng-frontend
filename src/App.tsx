@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './components/Header/Header'
 import HomePage from './pages/HomePage/HomePage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import RegisterPage from './pages/RegisterPage/RegisterPage'
 import './scss/App.scss'
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
 			<div className='container'>
 				<Header />
 				{/* <HomePage /> */}
-				<LoginPage />
+				{/* <LoginPage /> */}
+				<RegisterPage />
 			</div>
 		</div>
 	)
