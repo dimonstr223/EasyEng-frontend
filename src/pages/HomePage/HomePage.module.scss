@@ -19,12 +19,14 @@
 .example {
 	display: flex;
 	gap: 80px;
+	height: 100%;
 	margin-bottom: 30px;
 
 	.wrapper {
 		display: flex;
 		gap: 20px;
 		align-items: start;
+		height: 100%;
 
 		h2 {
 			color: $greenAccent;
