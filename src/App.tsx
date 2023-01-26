@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from './components/Header'
+import HomePage from './pages/HomePage/HomePage'
 import './scss/App.scss'
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 		<div className='App'>
 			<div className='container'>
 				<Header />
+				<HomePage />
 			</div>
 		</div>
 	)

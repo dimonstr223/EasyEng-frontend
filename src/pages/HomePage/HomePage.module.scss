@@ -1,0 +1,58 @@
+@import '../../scss/libs/vars.scss';
+
+.title {
+	font-size: 40px;
+	margin-bottom: 20px;
+	color: $orangeAccent;
+}
+
+.text {
+	font-size: 20px;
+	line-height: 40px;
+	span {
+		color: $greenAccent;
+		font-weight: bold;
+	}
+	margin-bottom: 50px;
+}
+
+.example {
+	display: flex;
+	// justify-content: space-between;
+	gap: 80px;
+
+	.wrapper {
+		display: flex;
+		gap: 20px;
+		align-items: start;
+
+		h2 {
+			color: $greenAccent;
+			margin-bottom: 20px;
+		}
+
+		.arrowImage {
+			transform: scale(1, -1);
+		}
+	}
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	// overflow-wrap: break-word;
+	gap: 40px;
+	padding: 20px;
+	max-width: 300px;
+	width: 100%;
+	border-radius: 20px;
+	align-items: center;
+	background-color: #012712;
+	cursor: pointer;
+	transition: transform 0.3s;
+
+	&:hover {
+		transform: translateY(-4px);
+	}
+}
