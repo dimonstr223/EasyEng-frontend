@@ -1,0 +1,42 @@
+@import '../../scss/libs/vars.scss';
+
+.loginContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 40px;
+	background-color: $greenBG;
+	width: 400px;
+	margin: 0 auto;
+	border-radius: 20px;
+	align-self: center;
+
+	.title {
+		color: $greenAccent;
+		margin-bottom: 50px;
+	}
+
+	.form {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		.input {
+			padding: 0 10px;
+			font-size: 20px;
+			text-align: center;
+			border: none;
+			border-radius: 10px;
+			width: 100%;
+			height: 40px;
+		}
+	}
+
+	.submitButton {
+		@extend %button;
+		background-color: $orangeAccent;
+		margin-top: 40px;
+		margin-bottom: 20px;
+	}
+}

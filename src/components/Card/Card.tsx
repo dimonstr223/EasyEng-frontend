@@ -5,11 +5,11 @@ import image from '../../assets/img/header-logo.svg'
 import style from './Card.module.scss'
 
 const Card = () => {
-	const [flip, setFlip] = React.useState(true)
+	const [flip, setFlip] = React.useState(false)
 
 	return (
 		<div
-			className={style[`${flip ? 'card' : 'flip'}`]}
+			className={style[`${flip ? 'flip' : 'card'}`]}
 			onClick={() => setFlip(!flip)}
 		>
 			<div className={style.back}>
