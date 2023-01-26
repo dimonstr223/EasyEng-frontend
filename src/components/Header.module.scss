@@ -1,0 +1,38 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 0;
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		.title {
+			font-size: 26px;
+			color: #78c800;
+		}
+	}
+
+	.authButtons {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		.login,
+		.register {
+			font-size: 20px;
+			background-color: #78c800;
+			color: #fff;
+			border: none;
+			border-radius: 5px;
+			padding: 6px 10px;
+			cursor: pointer;
+		}
+
+		.register {
+			background-color: #f49000;
+		}
+	}
+}
