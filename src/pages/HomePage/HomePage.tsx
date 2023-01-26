@@ -24,12 +24,13 @@ const HomePage = () => {
 					/>
 				</div>
 				<div className={style.card}>
-					<h3>Green bird</h3>
+					<h3 className={style.cardTitle}>Green bird</h3>
 					<div className={style.imgWrapper}>
 						<img src={image} width={150} alt='' />
 					</div>
 				</div>
 			</div>
+			<button className={style.getStartButton}>Get started</button>
 		</>
 	)
 }

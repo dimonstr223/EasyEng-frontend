@@ -1,2 +1,11 @@
 $greenAccent: #78c800;
 $orangeAccent: #f49000;
+%button {
+	font-size: 22px;
+	background-color: $greenAccent;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 10px 17px;
+	cursor: pointer;
+}
