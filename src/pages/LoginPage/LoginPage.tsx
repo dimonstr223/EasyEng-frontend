@@ -7,9 +7,11 @@ import style from './LoginPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import { fetchAuth, isAuthSelector } from '../../redux/slices/auth/authSlice'
 import useAppSelector from '../../hooks/useAppSelector'
+import { Navigate } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
 	const dispatch = useAppDispatch()
+	const isAuth = useAppSelector(isAuthSelector)
 
 	const {
 		register,
@@ -18,6 +20,8 @@ const LoginPage: React.FC = () => {
 	} = useForm<FormData>()
 
 	const onSubmit = handleSubmit(data => dispatch(fetchAuth(data)))
+
+	if (isAuth) return <Navigate to='/cards' />
 
 	return (
 		<div className={style.loginContainer}>
