@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import CardsPage from './pages/CardsPage/CardsPage'
 
 import HomePage from './pages/HomePage/HomePage'
 import Layout from './pages/Layout/Layout'
@@ -14,6 +15,7 @@ const App: React.FC = () => {
 			<Routes>
 				<Route path='/' element={<Layout />}>
 					<Route index element={<HomePage />} />
+					<Route path='/cards' element={<CardsPage />} />
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/register' element={<RegisterPage />} />
 				</Route>
