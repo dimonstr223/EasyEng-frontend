@@ -9,6 +9,7 @@ const LoginPage: React.FC = () => {
 			<form className={style.form}>
 				<label>Username</label>
 				<input className={style.input} type='text' />
+
 				<label>Password</label>
 				<input className={style.input} type='password' />
 			</form>
