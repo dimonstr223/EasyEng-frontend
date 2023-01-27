@@ -15,7 +15,10 @@ $greenBG: #012712;
 	opacity: 0.9;
 	transition: opacity 0.3s;
 	font-weight: 700;
-
+	&:disabled {
+		opacity: 0.5;
+		pointer-events: none;
+	}
 	&:hover {
 		opacity: 1;
 	}

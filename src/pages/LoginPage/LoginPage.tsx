@@ -16,8 +16,10 @@ const LoginPage: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
-	} = useForm<FormData>()
+		formState: { errors, isValid },
+	} = useForm<FormData>({
+		mode: 'onBlur',
+	})
 
 	const onSubmit = handleSubmit(async values => {
 		const data: any = await dispatch(fetchAuth(values))
@@ -62,7 +64,12 @@ const LoginPage: React.FC = () => {
 					/>
 					{errors.password && <div className={style.error}>Enter password</div>}
 				</div>
-				<input className={style.submitButton} type='submit' value='Submit' />
+				<input
+					disabled={!isValid}
+					className={style.submitButton}
+					type='submit'
+					value='Submit'
+				/>
 			</form>
 		</div>
 	)

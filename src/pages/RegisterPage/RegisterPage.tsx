@@ -9,8 +9,10 @@ const RegisterPage: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
-	} = useForm<FormData>()
+		formState: { errors, isValid },
+	} = useForm<FormData>({
+		mode: 'onBlur',
+	})
 
 	const onSubmit = handleSubmit(values => {
 		console.log(values)
@@ -43,7 +45,12 @@ const RegisterPage: React.FC = () => {
 					/>
 					{errors.password && <div className={style.error}>Enter password</div>}
 				</div>
-				<input className={style.submitButton} type='submit' value='Submit' />
+				<input
+					className={style.submitButton}
+					disabled={!isValid}
+					type='submit'
+					value='Submit'
+				/>
 			</form>
 		</div>
 	)
