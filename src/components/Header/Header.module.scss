@@ -24,8 +24,14 @@
 		gap: 10px;
 
 		.login,
-		.register {
+		.register,
+		.createCard,
+		.logout {
 			@extend %button;
+		}
+
+		.logout {
+			background-color: $redAccent;
 		}
 
 		.register {

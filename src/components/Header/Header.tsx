@@ -2,10 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import headerLogo from '../../assets/img/header-logo.svg'
+import useAppSelector from '../../hooks/useAppSelector'
+import { isAuthSelector } from '../../redux/slices/auth/authSlice'
 
 import style from './Header.module.scss'
 
 const Header: React.FC = () => {
+	const isAuth = useAppSelector(isAuthSelector)
+
 	return (
 		<header className={style.header}>
 			<Link to='/'>
@@ -15,12 +19,23 @@ const Header: React.FC = () => {
 				</div>
 			</Link>
 			<div className={style.authButtons}>
-				<Link to='/login' className={style.login}>
-					Login
-				</Link>
-				<Link to='/register' className={style.register}>
-					Create acc
-				</Link>
+				{isAuth ? (
+					<>
+						<Link className={style.createCard} to={'/create-card'}>
+							Create Card
+						</Link>
+						<button className={style.logout}>Log out</button>
+					</>
+				) : (
+					<>
+						<Link to='/login' className={style.login}>
+							Log in
+						</Link>
+						<Link to='/register' className={style.register}>
+							Create acc
+						</Link>
+					</>
+				)}
 			</div>
 		</header>
 	)

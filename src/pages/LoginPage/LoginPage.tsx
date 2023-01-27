@@ -33,7 +33,7 @@ const LoginPage: React.FC = () => {
 
 	return (
 		<div className={style.loginContainer}>
-			<h1 className={style.title}>Login</h1>
+			<h1 className={style.title}>Log in</h1>
 			<form className={style.form} onSubmit={onSubmit}>
 				<div className={style.inputWrapper}>
 					<label>Username</label>

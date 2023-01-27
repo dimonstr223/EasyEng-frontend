@@ -6,10 +6,7 @@ const CardsPage: React.FC = () => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.cardsBlock}>
-				<div className={style.cardsBlockTop}>
-					<h1 className={style.title}>My cards</h1>
-					<button className={style.createButton}>Create card</button>
-				</div>
+				<h1 className={style.title}>My cards</h1>
 				<div className={style.cards}></div>
 			</div>
 			<div className={style.tagsBlock}>

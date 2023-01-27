@@ -7,22 +7,11 @@
 
 	.cardsBlock {
 		width: 100%;
-		.cardsBlockTop {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
 
-			.title {
-				color: $orangeAccent;
-				margin-bottom: 20px;
-				font-size: 36px;
-			}
-
-			.createButton {
-				@extend %button;
-				height: 100%;
-				background-color: #037e3a;
-			}
+		.title {
+			color: $orangeAccent;
+			margin-bottom: 20px;
+			font-size: 36px;
 		}
 	}
 
