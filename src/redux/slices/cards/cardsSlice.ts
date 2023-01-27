@@ -1,8 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from '../../../axios/axios'
+import { ICard } from '../../../types/types'
+import { CardsState, Status } from './types'
 
-const initialState = {
+export const fetchCards = createAsyncThunk<ICard[]>(
+	'cards/fetchCards',
+	async () => {
+		const { data } = await axios.get('/api/cards')
+		return data
+	}
+)
+
+const initialState: CardsState = {
 	cards: {
-		status: 'loading',
+		status: Status.LOADING,
 		items: [],
 	},
 }

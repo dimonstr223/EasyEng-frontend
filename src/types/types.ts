@@ -8,6 +8,6 @@ export interface ICard {
 	id: string
 	word: string
 	translation: string
-	imageURL: string
+	imageURL?: string
 	user: IUser
 }
