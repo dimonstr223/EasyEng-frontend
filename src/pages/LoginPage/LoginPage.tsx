@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
 					<label>Password</label>
 					<input
 						className={style.input}
-						style={errors.username && { border: '3px solid #ff4e4e' }}
+						style={errors.password && { border: '3px solid #ff4e4e' }}
 						type='password'
 						{...register('password', {
 							required: true,
