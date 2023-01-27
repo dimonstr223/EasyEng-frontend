@@ -19,7 +19,15 @@ const LoginPage: React.FC = () => {
 		formState: { errors },
 	} = useForm<FormData>()
 
-	const onSubmit = handleSubmit(data => dispatch(fetchAuth(data)))
+	const onSubmit = handleSubmit(async values => {
+		const data: any = await dispatch(fetchAuth(values))
+		if (!data.payload) {
+			return alert('Authorization error')
+		}
+		if ('token' in data.payload) {
+			window.localStorage.setItem('token', data.payload.token)
+		}
+	})
 
 	if (isAuth) return <Navigate to='/cards' />
 

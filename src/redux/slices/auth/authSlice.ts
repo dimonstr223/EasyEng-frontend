@@ -9,7 +9,6 @@ export const fetchAuth = createAsyncThunk<IAuth, Form>(
 	'auth/fethchAuth',
 	async params => {
 		const { data } = await axios.post('/auth/login', params)
-		console.log(data)
 		return data
 	}
 )
@@ -32,6 +31,7 @@ const authSlice = createSlice({
 			.addCase(fetchAuth.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				state.data = action.payload
+				window.localStorage.setItem('token', state.data.token)
 			})
 			.addCase(fetchAuth.rejected, state => {
 				state.status = Status.ERROR
@@ -40,7 +40,7 @@ const authSlice = createSlice({
 	},
 })
 
-export const isAuthSelector = (state:RootState) => state.auth.data
+export const isAuthSelector = (state: RootState) => state.auth.data
 
 export const {} = authSlice.actions
 
