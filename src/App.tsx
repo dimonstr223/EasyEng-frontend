@@ -1,4 +1,5 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 
 import Header from './components/Header/Header'
 import HomePage from './pages/HomePage/HomePage'
@@ -12,9 +13,11 @@ const App: React.FC = () => {
 		<div className='App'>
 			<div className='container'>
 				<Header />
-				<HomePage />
-				{/* <LoginPage /> */}
-				{/* <RegisterPage /> */}
+				<Routes>
+					<Route path='/' element={<HomePage />} />
+					<Route path='/login' element={<LoginPage />} />
+					<Route path='/register' element={<RegisterPage />} />
+				</Routes>
 			</div>
 		</div>
 	)
