@@ -40,6 +40,8 @@ const authSlice = createSlice({
 	},
 })
 
+export const isAuthSelector = (state:RootState) => state.auth.data
+
 export const {} = authSlice.actions
 
 export default authSlice.reducer
