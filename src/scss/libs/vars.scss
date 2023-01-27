@@ -11,4 +11,10 @@ $greenBG: #012712;
 	border-radius: 5px;
 	padding: 10px 17px;
 	cursor: pointer;
+	opacity: 0.9;
+	transition: opacity 0.3s;
+
+	&:hover {
+		opacity: 1;
+	}
 }
