@@ -4,15 +4,20 @@ import { useForm } from 'react-hook-form'
 import { FormData } from './types'
 
 import style from './LoginPage.module.scss'
+import useAppDispatch from '../../hooks/useAppDispatch'
+import { fetchAuth, isAuthSelector } from '../../redux/slices/auth/authSlice'
+import useAppSelector from '../../hooks/useAppSelector'
 
 const LoginPage: React.FC = () => {
+	const dispatch = useAppDispatch()
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<FormData>()
 
-	const onSubmit = handleSubmit(data => console.log(data))
+	const onSubmit = handleSubmit(data => dispatch(fetchAuth(data)))
 
 	return (
 		<div className={style.loginContainer}>

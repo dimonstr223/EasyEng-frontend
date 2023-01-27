@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 
 import { FormData as Form } from '../../../pages/LoginPage/types'
+import { RootState } from '../../store'
 import { AuthState, IAuth, Status } from './types'
 
 export const fetchAuth = createAsyncThunk<IAuth, Form>(
