@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import headerLogo from '../../assets/img/header-logo.svg'
 
@@ -12,8 +13,12 @@ const Header: React.FC = () => {
 				<h3 className={style.title}>EasyLang</h3>
 			</div>
 			<div className={style.authButtons}>
-				<button className={style.login}>Login</button>
-				<button className={style.register}>Create acc</button>
+				<Link to='/login' className={style.login}>
+					Login
+				</Link>
+				<Link to='/register' className={style.register}>
+					Create acc
+				</Link>
 			</div>
 		</header>
 	)
