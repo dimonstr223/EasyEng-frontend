@@ -5,7 +5,7 @@ import arrow from '../../assets/img/arrow.svg'
 import style from './HomePage.module.scss'
 import Card from '../../components/Card/Card'
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
 	return (
 		<>
 			<h1 className={style.title}>Welcome</h1>

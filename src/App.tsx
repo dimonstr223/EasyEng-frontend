@@ -7,7 +7,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 
 import './scss/App.scss'
 
-function App() {
+const App: React.FC = () => {
 	return (
 		<div className='App'>
 			<div className='container'>

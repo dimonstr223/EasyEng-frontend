@@ -4,7 +4,7 @@ import headerLogo from '../../assets/img/header-logo.svg'
 
 import style from './Header.module.scss'
 
-const Header = () => {
+const Header: React.FC = () => {
 	return (
 		<header className={style.header}>
 			<div className={style.logo}>

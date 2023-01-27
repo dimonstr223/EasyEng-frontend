@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from './RegisterPage.module.scss'
 
-const RegisterPage = () => {
+const RegisterPage: React.FC = () => {
 	return (
 		<div className={style.registerContainer}>
 			<h1 className={style.title}>Registration</h1>

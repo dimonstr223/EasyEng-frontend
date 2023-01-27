@@ -4,7 +4,9 @@ import image from '../../assets/img/header-logo.svg'
 
 import style from './Card.module.scss'
 
-const Card = () => {
+interface CardProps {}
+
+const Card: React.FC = () => {
 	const [flip, setFlip] = React.useState(false)
 
 	return (

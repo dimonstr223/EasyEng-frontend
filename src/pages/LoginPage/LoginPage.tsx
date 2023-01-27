@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from './LoginPage.module.scss'
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
 	return (
 		<div className={style.loginContainer}>
 			<h1 className={style.title}>Login</h1>
