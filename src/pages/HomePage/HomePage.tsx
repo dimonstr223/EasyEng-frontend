@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import arrow from '../../assets/img/arrow.svg'
 
@@ -25,7 +26,9 @@ const HomePage: React.FC = () => {
 				</div>
 				<Card />
 			</div>
-			<button className={style.getStartButton}>Get started</button>
+			<Link to='/register' className={style.getStartButton}>
+				Get started
+			</Link>
 		</>
 	)
 }
