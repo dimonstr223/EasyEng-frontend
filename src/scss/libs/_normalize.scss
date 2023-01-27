@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Capriola&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Capriola&display=swap');*/
+@import '../fonts.scss';
+
 * {
 	padding: 0;
 	margin: 0;
 	list-style: none;
 	outline: none;
-	font-family: 'Capriola', sans-serif;
+	font-family: 'Nord', sans-serif;
 	box-sizing: border-box;
 }
 
@@ -19,6 +21,7 @@ body {
 	color: #fff;
 	background: #000;
 	letter-spacing: 2px;
+	font-size: 20px;
 }
 
 a,
