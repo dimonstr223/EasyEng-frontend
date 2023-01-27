@@ -8,10 +8,12 @@ import style from './Header.module.scss'
 const Header: React.FC = () => {
 	return (
 		<header className={style.header}>
-			<div className={style.logo}>
-				<img src={headerLogo} width={60} alt='header logo' />
-				<h3 className={style.title}>EasyLang</h3>
-			</div>
+			<Link to='/'>
+				<div className={style.logo}>
+					<img src={headerLogo} width={60} alt='header logo' />
+					<h3 className={style.title}>EasyLang</h3>
+				</div>
+			</Link>
 			<div className={style.authButtons}>
 				<Link to='/login' className={style.login}>
 					Login
