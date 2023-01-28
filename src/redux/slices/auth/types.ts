@@ -5,6 +5,7 @@ export interface IAuth {
 export interface AuthState {
 	status: string
 	data: IAuth | null
+	me: IMe | null
 }
 
 export interface IMe {

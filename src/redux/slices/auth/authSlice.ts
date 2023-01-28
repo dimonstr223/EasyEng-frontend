@@ -21,6 +21,7 @@ export const fetchMe = createAsyncThunk<IMe>('/auth/fetchMe', async () => {
 const initialState: AuthState = {
 	status: Status.LOADING,
 	data: null,
+	me: null,
 }
 
 const authSlice = createSlice({
@@ -41,6 +42,18 @@ const authSlice = createSlice({
 			.addCase(fetchAuth.rejected, state => {
 				state.status = Status.ERROR
 				state.data = null
+			})
+			.addCase(fetchMe.pending, state => {
+				state.status = Status.LOADING
+				state.me = null
+			})
+			.addCase(fetchMe.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.me = action.payload
+			})
+			.addCase(fetchMe.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.me = null
 			})
 	},
 })
