@@ -7,6 +7,13 @@ export interface AuthState {
 	data: IAuth | null
 }
 
+export interface IMe {
+	_id: string
+	username: string
+	password: string
+	roles: string[]
+}
+
 export enum Status {
 	LOADING = 'LOADING',
 	SUCCESS = 'SUCCESS',

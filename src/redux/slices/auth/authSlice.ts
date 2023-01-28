@@ -3,7 +3,7 @@ import axios from '../../../axios/axios'
 
 import { FormData as Form } from '../../../pages/LoginPage/types'
 import { RootState } from '../../store'
-import { AuthState, IAuth, Status } from './types'
+import { AuthState, IAuth, IMe, Status } from './types'
 
 export const fetchAuth = createAsyncThunk<IAuth, Form>(
 	'auth/fethchAuth',
@@ -12,6 +12,11 @@ export const fetchAuth = createAsyncThunk<IAuth, Form>(
 		return data
 	}
 )
+
+export const fetchMe = createAsyncThunk<IMe>('/auth/fetchMe', async () => {
+	const { data } = await axios.get('/auth/me')
+	return data
+})
 
 const initialState: AuthState = {
 	status: Status.LOADING,
