@@ -10,6 +10,13 @@
 	transform: perspective(1000px) rotateY(var(--rotate-y, 0));
 }
 
+@-moz-document url-prefix() {
+	.card {
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+}
+
 .card.flip {
 	--rotate-y: 180deg;
 }
