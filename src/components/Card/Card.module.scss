@@ -1,5 +1,4 @@
-.card,
-.flip {
+.card {
 	position: relative;
 	width: 300px;
 	text-align: center;
@@ -11,13 +10,14 @@
 	transform: perspective(1000px) rotateY(var(--rotate-y, 0));
 }
 
-.flip {
+.card.flip {
 	--rotate-y: 180deg;
 }
 
 .back,
 .front {
 	position: absolute;
+	-webkit-backface-visibility: hidden;
 	backface-visibility: hidden;
 	background-color: #012712;
 	height: 100%;

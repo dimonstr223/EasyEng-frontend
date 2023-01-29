@@ -16,8 +16,9 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 
 	return (
 		<div
-			className={style[`${flip ? 'flip' : 'card'}`]}
+			className={flip ? style.card + ' ' + style.flip : style.card}
 			onClick={() => setFlip(!flip)}
+			onMouseLeave={() => setFlip(false)}
 		>
 			<div className={style.back}>
 				<h3 className={style.translation}>{translation}</h3>
