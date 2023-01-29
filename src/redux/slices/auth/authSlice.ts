@@ -13,6 +13,19 @@ export const fetchLogin = createAsyncThunk<IAuthResponse, Form>(
 	}
 )
 
+export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
+	'auth/fetchSignUp',
+	async params => {
+		const { data } = await axios.post<IAuthResponse>('/auth/signup', params)
+		return data
+	}
+)
+
+export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
+	const { data } = await axios.post('auth/logout')
+	return data
+})
+
 const initialState: AuthState = {
 	status: Status.LOADING,
 	data: null,
