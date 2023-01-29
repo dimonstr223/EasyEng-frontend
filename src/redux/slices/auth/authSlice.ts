@@ -46,6 +46,7 @@ const authSlice = createSlice({
 			// LOGIN
 			.addCase(fetchLogin.pending, state => {
 				state.status = Status.LOADING
+				state.me = null
 			})
 			.addCase(fetchLogin.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
@@ -54,6 +55,7 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchLogin.rejected, state => {
 				state.status = Status.ERROR
+				state.me = null
 			})
 
 			// SIGNUP
