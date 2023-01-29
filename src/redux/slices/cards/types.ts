@@ -6,10 +6,13 @@ export enum Status {
 	ERROR = 'ERROR',
 }
 
-export interface CardsState {
-	cards: {
-		status: Status
-		totalCount: number
-		items: ICard[]
-	}
+export interface ICardsResponse {
+	totalCount: number
+	cards: ICard[]
+}
+
+export interface ICardsState {
+	status: Status
+	totalCount: number
+	cards: ICard[] | null
 }

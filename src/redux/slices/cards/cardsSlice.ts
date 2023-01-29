@@ -1,22 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
-import { ICard } from '../../../types/types'
-import { CardsState, Status } from './types'
+import { ICardsResponse, ICardsState, Status } from './types'
 
-export const fetchCards = createAsyncThunk<ICard[]>(
+export const fetchCards = createAsyncThunk<ICardsResponse>(
 	'cards/fetchCards',
 	async () => {
-		const { data } = await axios.get('/api/cards')
+		const { data } = await axios.get<ICardsResponse>('/api/cards')
 		return data
 	}
 )
 
-const initialState: CardsState = {
-	cards: {
-		status: Status.LOADING,
-		items: [],
-		totalCount: 0,
-	},
+const initialState: ICardsState = {
+	status: Status.LOADING,
+	totalCount: 0,
+	cards: [],
 }
 
 const cardsSlice = createSlice({
@@ -25,17 +22,18 @@ const cardsSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
-			.addCase(fetchCards.pending, state => {
-				state.cards.status = Status.LOADING
-				state.cards.items = []
+			.addCase(fetchCards.pending, (state, action) => {
+				state.status = Status.LOADING
+				state.cards = null
 			})
 			.addCase(fetchCards.fulfilled, (state, action) => {
-				state.cards.items = action.payload
-				state.cards.status = Status.SUCCESS
+				state.status = Status.SUCCESS
+				state.cards = action.payload.cards
+				state.totalCount = action.payload.totalCount
 			})
-			.addCase(fetchCards.rejected, state => {
-				state.cards.items = []
-				state.cards.status = Status.ERROR
+			.addCase(fetchCards.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.cards = null
 			})
 	},
 })
