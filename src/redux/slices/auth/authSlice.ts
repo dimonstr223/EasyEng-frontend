@@ -96,4 +96,6 @@ const authSlice = createSlice({
 	},
 })
 
+export const isAuthSelector = (state: RootState) => Boolean(state.auth.me)
+
 export default authSlice.reducer

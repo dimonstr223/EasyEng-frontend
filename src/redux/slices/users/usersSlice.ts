@@ -26,6 +26,4 @@ const usersSlice = createSlice({
 	extraReducers: {},
 })
 
-export const isAuthSelector = (state: RootState) => Boolean(state.auth.me)
-
 export default usersSlice.reducer
