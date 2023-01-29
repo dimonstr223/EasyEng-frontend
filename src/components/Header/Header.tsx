@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import headerLogo from '../../assets/img/header-logo.svg'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import useAppSelector from '../../hooks/useAppSelector'
-import { fetchLogout } from '../../redux/slices/auth/authSlice'
+import { fetchLogout, isAuthSelector } from '../../redux/slices/auth/authSlice'
 
 import style from './Header.module.scss'
 
 const Header: React.FC = () => {
+	const isAuth = useAppSelector(isAuthSelector)
 	return (
 		<header className={style.header}>
 			<Link to='/'>

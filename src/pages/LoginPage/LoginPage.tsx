@@ -7,6 +7,7 @@ import style from './LoginPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import { fetchLogin, isAuthSelector } from '../../redux/slices/auth/authSlice'
 import useAppSelector from '../../hooks/useAppSelector'
+import { Navigate } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
 	const dispatch = useAppDispatch()
@@ -24,6 +25,9 @@ const LoginPage: React.FC = () => {
 		dispatch(fetchLogin(params))
 	})
 
+	if (isAuth) {
+		return <Navigate to='/cards' />
+	}
 	return (
 		<div className={style.loginContainer}>
 			<h1 className={style.title}>Log in</h1>
