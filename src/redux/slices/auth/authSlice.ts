@@ -50,6 +50,7 @@ const authSlice = createSlice({
 			.addCase(fetchLogin.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				localStorage.setItem('token', action.payload.accessToken)
+				state.me = action.payload.userData
 			})
 			.addCase(fetchLogin.rejected, state => {
 				state.status = Status.ERROR
