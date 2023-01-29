@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import headerLogo from '../../assets/img/header-logo.svg'
 import useAppDispatch from '../../hooks/useAppDispatch'
@@ -9,7 +9,15 @@ import { fetchLogout, isAuthSelector } from '../../redux/slices/auth/authSlice'
 import style from './Header.module.scss'
 
 const Header: React.FC = () => {
+	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
+	const navigate = useNavigate()
+
+	const onLogoutClick = async () => {
+		await dispatch(fetchLogout())
+		navigate('/')
+	}
+
 	return (
 		<header className={style.header}>
 			<Link to='/'>
@@ -24,7 +32,9 @@ const Header: React.FC = () => {
 						<Link className={style.createCard} to={'/create-card'}>
 							Create Card
 						</Link>
-						<button className={style.logout}>Log out</button>
+						<button onClick={onLogoutClick} className={style.logout}>
+							Log out
+						</button>
 					</>
 				) : (
 					<>
