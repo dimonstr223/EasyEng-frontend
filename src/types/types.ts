@@ -4,7 +4,7 @@ export interface IUser {
 }
 
 export interface ICard {
-	id: string
+	_id: string
 	word: string
 	translation: string
 	imageURL?: string
