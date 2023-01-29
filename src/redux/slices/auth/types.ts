@@ -1,10 +1,11 @@
-export interface IAuth {
-	token: string
+export interface IAuthResponse {
+	accessToken: string
+	refreshToken: string
 }
 
 export interface AuthState {
 	status: string
-	data: IAuth | null
+	data: IAuthResponse | null
 	me: IMe | null
 }
 
