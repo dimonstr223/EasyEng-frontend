@@ -1,17 +1,24 @@
 @import '../../scss/libs/vars.scss';
 
 .wrapper {
-	display: flex;
-	justify-content: space-between;
-	gap: 20px;
+	// display: flex;
+	// justify-content: space-between;
+	// gap: 20px;
 
 	.cardsBlock {
 		width: 100%;
 
 		.title {
 			color: $orangeAccent;
-			margin-bottom: 20px;
+			margin-bottom: 40px;
 			font-size: 36px;
+		}
+
+		.cards {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 20px;
 		}
 	}
 

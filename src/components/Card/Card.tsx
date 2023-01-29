@@ -1,12 +1,14 @@
 import React from 'react'
 
-import image from '../../assets/img/header-logo.svg'
-
 import style from './Card.module.scss'
 
-interface CardProps {}
+interface ICardProps {
+	word: string
+	translation: string
+	imageURL?: string
+}
 
-const Card: React.FC = () => {
+const Card: React.FC<ICardProps> = ({ word, translation, imageURL }) => {
 	const [flip, setFlip] = React.useState(false)
 
 	return (
@@ -15,12 +17,12 @@ const Card: React.FC = () => {
 			onClick={() => setFlip(!flip)}
 		>
 			<div className={style.back}>
-				<h3 className={style.translation}>Зеленая птица</h3>
+				<h3 className={style.translation}>{translation}</h3>
 			</div>
 			<div className={style.front}>
-				<h3 className={style.word}>Green bird</h3>
+				<h3 className={style.word}>{word}</h3>
 				<div className={style.imgWrapper}>
-					<img src={image} alt='' />
+					<img src={imageURL} alt='Illustration' />
 				</div>
 			</div>
 		</div>

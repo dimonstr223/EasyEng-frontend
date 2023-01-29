@@ -2,9 +2,11 @@ import React from 'react'
 import { Link, Navigate } from 'react-router-dom'
 
 import arrow from '../../assets/img/arrow.svg'
+import birdImage from '../../assets/img/header-logo.svg'
+
+import Card from '../../components/Card/Card'
 
 import style from './HomePage.module.scss'
-import Card from '../../components/Card/Card'
 
 const HomePage: React.FC = () => {
 	if (localStorage.getItem('token')) {
@@ -27,7 +29,11 @@ const HomePage: React.FC = () => {
 						alt='arrow'
 					/>
 				</div>
-				<Card />
+				<Card
+					word='Green bird'
+					translation='Зеленая птица'
+					imageURL={birdImage}
+				/>
 			</div>
 			<Link to='/register' className={style.getStartButton}>
 				Get started

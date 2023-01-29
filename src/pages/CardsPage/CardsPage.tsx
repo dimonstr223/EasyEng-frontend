@@ -19,7 +19,15 @@ const CardsPage: React.FC = () => {
 			<div className={style.cardsBlock}>
 				<h1 className={style.title}>My cards</h1>
 				<div className={style.cards}>
-					{cards && cards.map(item => <Card key={item._id} />)}
+					{cards &&
+						cards.map(item => (
+							<Card
+								key={item._id}
+								word={item.word}
+								translation={item.translation}
+								imageURL={item?.imageURL}
+							/>
+						))}
 				</div>
 			</div>
 			{/* <div className={style.tagsBlock}>
