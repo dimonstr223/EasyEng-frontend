@@ -7,17 +7,10 @@ import HomePage from './pages/HomePage/HomePage'
 import Layout from './pages/Layout/Layout'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
-import { fetchMe } from './redux/slices/auth/authSlice'
 
 import './scss/App.scss'
 
 const App: React.FC = () => {
-	const dispatch = useAppDispatch()
-
-	React.useEffect(() => {
-		dispatch(fetchMe())
-	}, [])
-
 	return (
 		<div className='App'>
 			<Routes>
