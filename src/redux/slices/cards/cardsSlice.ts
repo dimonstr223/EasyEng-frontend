@@ -15,6 +15,7 @@ const initialState: CardsState = {
 	cards: {
 		status: Status.LOADING,
 		items: [],
+		totalCount: 0,
 	},
 }
 

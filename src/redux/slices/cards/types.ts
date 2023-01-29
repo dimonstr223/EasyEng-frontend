@@ -9,6 +9,7 @@ export enum Status {
 export interface CardsState {
 	cards: {
 		status: Status
+		totalCount: number
 		items: ICard[]
 	}
 }
