@@ -24,7 +24,7 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 			</div>
 			<div className={style.front}>
 				<h3 className={style.word}>{word}</h3>
-				{cards && cards.find(item => item._id === _id)?.imageURL && (
+				{imageURL && (
 					<div className={style.imgWrapper}>
 						<img src={imageURL} alt='Illustration' />
 					</div>
