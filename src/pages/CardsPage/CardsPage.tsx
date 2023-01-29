@@ -26,6 +26,7 @@ const CardsPage: React.FC = () => {
 								word={item.word}
 								translation={item.translation}
 								imageURL={item?.imageURL}
+								_id={item._id}
 							/>
 						))}
 				</div>

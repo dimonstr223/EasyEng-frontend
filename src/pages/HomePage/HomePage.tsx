@@ -30,6 +30,7 @@ const HomePage: React.FC = () => {
 					/>
 				</div>
 				<Card
+					_id='0'
 					word='Green bird'
 					translation='Зеленая птица'
 					imageURL={birdImage}
