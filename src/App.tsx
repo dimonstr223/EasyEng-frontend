@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import useAppDispatch from './hooks/useAppDispatch'
 import CardsPage from './pages/CardsPage/CardsPage'
 
 import HomePage from './pages/HomePage/HomePage'
 import Layout from './pages/Layout/Layout'
 import LoginPage from './pages/LoginPage/LoginPage'
 import RegisterPage from './pages/RegisterPage/RegisterPage'
+import { fetchMe } from './redux/slices/auth/authSlice'
 
 import './scss/App.scss'
 
 const App: React.FC = () => {
+	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		dispatch(fetchMe())
+	}, [])
+
 	return (
 		<div className='App'>
 			<Routes>
