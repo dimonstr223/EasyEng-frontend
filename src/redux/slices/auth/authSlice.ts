@@ -56,7 +56,7 @@ const authSlice = createSlice({
 			})
 
 			// SIGNUP
-			.addCase(fetchSingUp.pending, state => {
+			.addCase(fetchSingUp.pending, (state, action) => {
 				state.status = Status.LOADING
 			})
 			.addCase(fetchSingUp.fulfilled, (state, action) => {
@@ -68,16 +68,30 @@ const authSlice = createSlice({
 			})
 
 			// LOGOUT
-			.addCase(fetchLogout.pending, state => {
+			.addCase(fetchLogout.pending, (state, action) => {
 				state.status = Status.LOADING
 			})
-			.addCase(fetchLogout.fulfilled, state => {
+			.addCase(fetchLogout.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				localStorage.removeItem('token')
 			})
-			.addCase(fetchLogout.rejected, state => {
+			.addCase(fetchLogout.rejected, (state, action) => {
 				state.status = Status.ERROR
 				localStorage.removeItem('token')
+			})
+
+			// ME
+			.addCase(fetchMe.pending, (state, action) => {
+				state.status = Status.LOADING
+				state.me = null
+			})
+			.addCase(fetchMe.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.me = action.payload
+			})
+			.addCase(fetchMe.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.me = null
 			})
 	},
 })
