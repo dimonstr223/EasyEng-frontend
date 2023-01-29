@@ -2,11 +2,13 @@ export interface IAuthResponse {
 	accessToken: string
 	refreshToken: string
 }
-
+export interface IMe {
+	_id: string
+	username: string
+}
 export interface AuthState {
 	status: Status
-	isAuth: boolean
-	tokens: IAuthResponse | null
+	me: IMe | null
 }
 
 export enum Status {

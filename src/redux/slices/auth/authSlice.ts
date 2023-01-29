@@ -3,7 +3,7 @@ import axios from '../../../axios/axios'
 
 import { FormData as Form } from '../../../pages/LoginPage/types'
 import { RootState } from '../../store'
-import { AuthState, IAuthResponse, Status } from './types'
+import { AuthState, IAuthResponse, Status, IMe } from './types'
 
 export const fetchLogin = createAsyncThunk<IAuthResponse, Form>(
 	'auth/fethchAuth',
@@ -22,14 +22,18 @@ export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
 )
 
 export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
-	const { data } = await axios.post('auth/logout')
+	const { data } = await axios.delete('auth/logout')
+	return data
+})
+
+export const fetchMe = createAsyncThunk<IMe>('auth/fetchMe', async () => {
+	const { data } = await axios.get<IMe>('/me')
 	return data
 })
 
 const initialState: AuthState = {
 	status: Status.LOADING,
-	isAuth: false,
-	tokens: null,
+	me: null,
 }
 
 const authSlice = createSlice({
@@ -42,64 +46,40 @@ const authSlice = createSlice({
 			// LOGIN
 			.addCase(fetchLogin.pending, state => {
 				state.status = Status.LOADING
-				state.isAuth = false
 			})
-			.addCase(fetchLogin.fulfilled, state => {
+			.addCase(fetchLogin.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.isAuth = true
-				if (state.tokens) {
-					localStorage.setItem('token', state.tokens?.accessToken)
-				}
+				localStorage.setItem('token', action.payload.accessToken)
 			})
 			.addCase(fetchLogin.rejected, state => {
 				state.status = Status.ERROR
-				state.isAuth = false
 			})
 
 			// SIGNUP
 			.addCase(fetchSingUp.pending, state => {
 				state.status = Status.LOADING
-				state.isAuth = false
 			})
 			.addCase(fetchSingUp.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				if (state.tokens) {
-					localStorage.setItem('token', state.tokens.accessToken)
-				}
+				localStorage.setItem('token', action.payload.accessToken)
 			})
 			.addCase(fetchSingUp.rejected, (state, action) => {
 				state.status = Status.ERROR
-				state.isAuth = false
 			})
 
 			// LOGOUT
 			.addCase(fetchLogout.pending, state => {
 				state.status = Status.LOADING
-				state.isAuth = false
-				if (state.tokens) {
-					state.tokens = null
-				}
-				localStorage.removeItem('token')
 			})
 			.addCase(fetchLogout.fulfilled, state => {
 				state.status = Status.SUCCESS
-				state.isAuth = false
-				if (state.tokens) {
-					state.tokens = null
-				}
 				localStorage.removeItem('token')
 			})
 			.addCase(fetchLogout.rejected, state => {
 				state.status = Status.ERROR
-				state.isAuth = false
-				if (state.tokens) {
-					state.tokens = null
-				}
 				localStorage.removeItem('token')
 			})
 	},
 })
-
-export const isAuthSelector = (state: RootState) => state.auth.isAuth
 
 export default authSlice.reducer

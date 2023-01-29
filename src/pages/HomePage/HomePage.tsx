@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 import arrow from '../../assets/img/arrow.svg'
 
@@ -7,6 +7,9 @@ import style from './HomePage.module.scss'
 import Card from '../../components/Card/Card'
 
 const HomePage: React.FC = () => {
+	if (localStorage.getItem('token')) {
+		return <Navigate to='/cards' />
+	}
 	return (
 		<>
 			<h1 className={style.title}>Welcome</h1>

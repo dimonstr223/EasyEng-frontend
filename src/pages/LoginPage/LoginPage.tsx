@@ -5,9 +5,8 @@ import { FormData } from './types'
 
 import style from './LoginPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
-import { fetchAuth, isAuthSelector } from '../../redux/slices/auth/authSlice'
+import { fetchLogin, isAuthSelector } from '../../redux/slices/auth/authSlice'
 import useAppSelector from '../../hooks/useAppSelector'
-import { Navigate } from 'react-router-dom'
 
 const LoginPage: React.FC = () => {
 	const dispatch = useAppDispatch()
@@ -21,17 +20,9 @@ const LoginPage: React.FC = () => {
 		mode: 'onBlur',
 	})
 
-	const onSubmit = handleSubmit(async values => {
-		const data: any = await dispatch(fetchAuth(values))
-		if (!data.payload) {
-			return alert('Authorization error')
-		}
-		if ('token' in data.payload) {
-			window.localStorage.setItem('token', data.payload.token)
-		}
+	const onSubmit = handleSubmit(params => {
+		dispatch(fetchLogin(params))
 	})
-
-	if (isAuth) return <Navigate to='/cards' />
 
 	return (
 		<div className={style.loginContainer}>
