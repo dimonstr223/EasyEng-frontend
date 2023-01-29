@@ -3,7 +3,7 @@ import axios from '../../../axios/axios'
 
 import { FormData as Form } from '../../../pages/LoginPage/types'
 import { RootState } from '../../store'
-import { AuthState, IAuthResponse, IMe, Status } from './types'
+import { AuthState, IAuthResponse, Status } from './types'
 
 export const fetchLogin = createAsyncThunk<IAuthResponse, Form>(
 	'auth/fethchAuth',
@@ -28,8 +28,8 @@ export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
 
 const initialState: AuthState = {
 	status: Status.LOADING,
-	data: null,
-	me: null,
+	isAuth: false,
+	tokens: null,
 }
 
 const authSlice = createSlice({
@@ -38,36 +38,38 @@ const authSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
-			.addCase(fetchAuth.pending, state => {
+			.addCase(fetchLogin.pending, state => {
 				state.status = Status.LOADING
-				state.data = null
+				state.isAuth = false
 			})
-			.addCase(fetchAuth.fulfilled, (state, action) => {
+			.addCase(fetchLogin.fulfilled, state => {
 				state.status = Status.SUCCESS
-				state.data = action.payload
-				window.localStorage.setItem('token', state.data.token)
+				state.isAuth = true
+				if (state.tokens) {
+					localStorage.setItem('token', state.tokens?.accessToken)
+				}
 			})
-			.addCase(fetchAuth.rejected, state => {
+			.addCase(fetchLogin.rejected, state => {
 				state.status = Status.ERROR
-				state.data = null
+				state.isAuth = false
 			})
-			.addCase(fetchMe.pending, state => {
+			.addCase(fetchSingUp.pending, state => {
 				state.status = Status.LOADING
-				state.me = null
+				state.isAuth = false
 			})
-			.addCase(fetchMe.fulfilled, (state, action) => {
+			.addCase(fetchSingUp.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.me = action.payload
+				if (state.tokens) {
+					localStorage.setItem('token', state.tokens.accessToken)
+				}
 			})
-			.addCase(fetchMe.rejected, (state, action) => {
+			.addCase(fetchSingUp.rejected, (state, action) => {
 				state.status = Status.ERROR
-				state.me = null
+				state.isAuth = false
 			})
 	},
 })
 
-export const isAuthSelector = (state: RootState) => state.auth.data
-
-export const {} = authSlice.actions
+export const isAuthSelector = (state: RootState) => state.auth.isAuth
 
 export default authSlice.reducer

@@ -4,16 +4,9 @@ export interface IAuthResponse {
 }
 
 export interface AuthState {
-	status: string
-	data: IAuthResponse | null
-	me: IMe | null
-}
-
-export interface IMe {
-	_id: string
-	username: string
-	password: string
-	roles: string[]
+	status: Status
+	isAuth: boolean
+	tokens: IAuthResponse | null
 }
 
 export enum Status {
