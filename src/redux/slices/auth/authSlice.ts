@@ -38,6 +38,8 @@ const authSlice = createSlice({
 	reducers: {},
 	extraReducers: builder => {
 		builder
+
+			// LOGIN
 			.addCase(fetchLogin.pending, state => {
 				state.status = Status.LOADING
 				state.isAuth = false
@@ -53,6 +55,8 @@ const authSlice = createSlice({
 				state.status = Status.ERROR
 				state.isAuth = false
 			})
+
+			// SIGNUP
 			.addCase(fetchSingUp.pending, state => {
 				state.status = Status.LOADING
 				state.isAuth = false
@@ -67,12 +71,15 @@ const authSlice = createSlice({
 				state.status = Status.ERROR
 				state.isAuth = false
 			})
+
+			// LOGOUT
 			.addCase(fetchLogout.pending, state => {
 				state.status = Status.LOADING
 				state.isAuth = false
 				if (state.tokens) {
 					state.tokens = null
 				}
+				localStorage.removeItem('token')
 			})
 			.addCase(fetchLogout.fulfilled, state => {
 				state.status = Status.SUCCESS
@@ -80,6 +87,7 @@ const authSlice = createSlice({
 				if (state.tokens) {
 					state.tokens = null
 				}
+				localStorage.removeItem('token')
 			})
 			.addCase(fetchLogout.rejected, state => {
 				state.status = Status.ERROR
@@ -87,6 +95,7 @@ const authSlice = createSlice({
 				if (state.tokens) {
 					state.tokens = null
 				}
+				localStorage.removeItem('token')
 			})
 	},
 })
