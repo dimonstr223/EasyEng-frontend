@@ -73,14 +73,17 @@ const authSlice = createSlice({
 			// LOGOUT
 			.addCase(fetchLogout.pending, (state, action) => {
 				state.status = Status.LOADING
+				state.me = null
 			})
 			.addCase(fetchLogout.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				localStorage.removeItem('token')
+				state.me = null
 			})
 			.addCase(fetchLogout.rejected, (state, action) => {
 				state.status = Status.ERROR
 				localStorage.removeItem('token')
+				state.me = null
 			})
 
 			// ME
