@@ -2,6 +2,7 @@ import { IUser, UsersState } from './types'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 import { Status } from '../auth/types'
+import { RootState } from '../../store'
 
 export const fetchUsers = createAsyncThunk<IUser[]>(
 	'users/FetchUsers',
@@ -24,5 +25,7 @@ const usersSlice = createSlice({
 	reducers: {},
 	extraReducers: {},
 })
+
+export const isAuthSelector = (state: RootState) => Boolean(state.auth.me)
 
 export default usersSlice.reducer
