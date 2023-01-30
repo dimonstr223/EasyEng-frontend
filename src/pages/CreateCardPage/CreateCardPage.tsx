@@ -3,6 +3,7 @@ import closeIcon from '../../assets/img/close-icon.svg'
 import style from './CreateCardPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import {
+	fetchCreate,
 	fetchUpload,
 	removeImageURL,
 } from '../../redux/slices/cards/cardsSlice'
@@ -29,6 +30,7 @@ const CreateCardPage: FC = () => {
 	) => {
 		event.preventDefault()
 		const params = { word, translation, imageURL }
+		dispatch(fetchCreate(params))
 	}
 
 	const onRemoveClick = () => {
