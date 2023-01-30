@@ -16,7 +16,6 @@ export const fetchCards = createAsyncThunk<ICardsResponse>(
 		return data
 	}
 )
-
 export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
 	'cards/fetchUpload',
 	async formData => {
@@ -24,7 +23,6 @@ export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
 		return data
 	}
 )
-
 export const fetchCreate = createAsyncThunk<ICard, ICardParams>(
 	'cards/fetchCreate',
 	async params => {
@@ -32,13 +30,19 @@ export const fetchCreate = createAsyncThunk<ICard, ICardParams>(
 		return data
 	}
 )
-
 const initialState: ICardsState = {
 	status: Status.LOADING,
 	totalCount: 0,
 	cards: [],
 	imageURL: '',
 }
+export const fetchUpdate = createAsyncThunk<ICard>(
+	'cards/fetchUpdate',
+	async (id, params) => {
+		const { data } = await axios.put<ICard>(`/api/cards/${id}`, params)
+		return data
+	}
+)
 
 const cardsSlice = createSlice({
 	name: 'cards',

@@ -14,7 +14,7 @@ interface ICardProps {
 }
 
 const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
-	const { cards } = useAppSelector(state => state.cards)
+	// const { cards } = useAppSelector(state => state.cards)
 	const [flip, setFlip] = React.useState(false)
 
 	return (
