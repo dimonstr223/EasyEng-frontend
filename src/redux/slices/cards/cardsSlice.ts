@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
-import { ICardsResponse, ICardsState, Status } from './types'
+import { ICardsResponse, ICardsState, IUploadResponse, Status } from './types'
 
 export const fetchCards = createAsyncThunk<ICardsResponse>(
 	'cards/fetchCards',
@@ -10,10 +10,19 @@ export const fetchCards = createAsyncThunk<ICardsResponse>(
 	}
 )
 
+export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
+	'cards/fetchUpload',
+	async formData => {
+		const { data } = await axios.post<IUploadResponse>('/api/upload', formData)
+		return data
+	}
+)
+
 const initialState: ICardsState = {
 	status: Status.LOADING,
 	totalCount: 0,
 	cards: [],
+	imageURL: '',
 }
 
 const cardsSlice = createSlice({
@@ -34,6 +43,18 @@ const cardsSlice = createSlice({
 			.addCase(fetchCards.rejected, (state, action) => {
 				state.status = Status.ERROR
 				state.cards = null
+			})
+			.addCase(fetchUpload.pending, (state, action) => {
+				state.status = Status.LOADING
+				state.imageURL = ''
+			})
+			.addCase(fetchUpload.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.imageURL = action.payload.url
+			})
+			.addCase(fetchUpload.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.imageURL = ''
 			})
 	},
 })

@@ -3,9 +3,12 @@ import image from '../../assets/img/header-logo.svg'
 import closeIcon from '../../assets/img/close-icon.svg'
 import style from './CreateCardPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
+import { fetchUpload } from '../../redux/slices/cards/cardsSlice'
+import useAppSelector from '../../hooks/useAppSelector'
 
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
+	const { imageURL } = useAppSelector(state => state.cards)
 	// interface IValues {
 	// 	word: string
 	// 	translation: string
@@ -18,15 +21,13 @@ const CreateCardPage: FC = () => {
 	// })
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
-	const [imageURL, setImgaeURL] = useState('')
 
-	const handleImageUpload = async (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
+	const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files) {
 			const formData = new FormData()
 			const file = event.target.files[0]
 			formData.append('image', file)
+			dispatch(fetchUpload(formData))
 		}
 	}
 
@@ -75,10 +76,15 @@ const CreateCardPage: FC = () => {
 					/>
 					{imageURL && (
 						<div className={style.imgWrapper}>
-							<img className={style.image} src={image} alt='Illustration' />
+							<img
+								className={style.image}
+								src={`http://localhost:5555${imageURL}`}
+								alt='Illustration'
+							/>
 							<img
 								className={style.removeButton}
 								src={closeIcon}
+								onClick={onRemoveClick}
 								alt='remove'
 							/>
 						</div>
