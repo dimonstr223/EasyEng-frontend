@@ -22,12 +22,12 @@ export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
 )
 
 export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
-	const { data } = await axios.delete('auth/logout')
+	const { data } = await axios.delete('/auth/logout')
 	return data
 })
 
 export const fetchMe = createAsyncThunk<IMe>('auth/fetchMe', async () => {
-	const { data } = await axios.get<IMe>('/me')
+	const { data } = await axios.get<IMe>('/auth/me')
 	return data
 })
 

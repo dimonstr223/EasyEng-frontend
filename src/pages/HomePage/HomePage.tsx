@@ -5,11 +5,14 @@ import arrow from '../../assets/img/arrow.svg'
 import birdImage from '../../assets/img/header-logo.svg'
 
 import Card from '../../components/Card/Card'
+import useAppSelector from '../../hooks/useAppSelector'
+import { isAuthSelector } from '../../redux/slices/auth/authSlice'
 
 import style from './HomePage.module.scss'
 
 const HomePage: React.FC = () => {
-	if (localStorage.getItem('token')) {
+	const isAuth = useAppSelector(isAuthSelector)
+	if (isAuth) {
 		return <Navigate to='/cards' />
 	}
 	return (

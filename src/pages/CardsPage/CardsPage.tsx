@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Card from '../../components/Card/Card'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import useAppSelector from '../../hooks/useAppSelector'
+import { isAuthSelector } from '../../redux/slices/auth/authSlice'
 import { fetchCards } from '../../redux/slices/cards/cardsSlice'
+import { Status } from '../../redux/slices/cards/types'
 
 import style from './CardsPage.module.scss'
 
 const CardsPage: React.FC = () => {
+	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
-	const { cards } = useAppSelector(state => state.cards)
+	const isAuth = useAppSelector(isAuthSelector)
+	const { cards, status } = useAppSelector(state => state.cards)
 
 	useEffect(() => {
 		dispatch(fetchCards())
 	}, [])
+
+	if (!isAuth) {
+		navigate('/')
+	}
 
 	return (
 		<div className={style.wrapper}>

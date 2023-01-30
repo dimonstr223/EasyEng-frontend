@@ -8,10 +8,12 @@ import {
 	removeImageURL,
 } from '../../redux/slices/cards/cardsSlice'
 import useAppSelector from '../../hooks/useAppSelector'
+import { useNavigate } from 'react-router-dom'
 
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { imageURL } = useAppSelector(state => state.cards)
+	const navigate = useNavigate()
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
@@ -25,12 +27,13 @@ const CreateCardPage: FC = () => {
 		}
 	}
 
-	const onSubmitClick = (
+	const onSubmitClick = async (
 		event: React.MouseEvent<HTMLInputElement, MouseEvent>
 	) => {
 		event.preventDefault()
 		const params = { word, translation, imageURL }
-		dispatch(fetchCreate(params))
+		await dispatch(fetchCreate(params))
+		navigate('/cards')
 	}
 
 	const onRemoveClick = () => {

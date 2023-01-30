@@ -80,7 +80,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchCreate.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.cards = [action.payload, ...state.cards]
+				state.cards = [...state.cards, action.payload]
 			})
 			.addCase(fetchCreate.rejected, (state, action) => {
 				state.status = Status.ERROR

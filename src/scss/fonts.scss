@@ -1,17 +1,8 @@
 @font-face {
-	font-family: 'Nord';
+	font-family: 'Futuraround';
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
-	src: local('Nord'), url('../../public/fonts/nord.woff2') format('woff2'),
-		url('../../public/fonts/nord.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'Nord';
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
-	src: local('Nord'), url('../../public/fonts/nord-bold.woff2') format('woff2'),
-		url('../../public/fonts/nord-bold.woff') format('woff');
+	src: local('Nord'),
+		url('../../public/fonts/futuraround.woff2') format('woff2');
 }
