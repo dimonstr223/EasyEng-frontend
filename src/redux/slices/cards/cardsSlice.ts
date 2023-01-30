@@ -54,6 +54,7 @@ const cardsSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
+			// FETCH CARDS
 			.addCase(fetchCards.pending, (state, action) => {
 				state.status = Status.LOADING
 				state.cards = []
@@ -67,6 +68,8 @@ const cardsSlice = createSlice({
 				state.status = Status.ERROR
 				state.cards = []
 			})
+
+			// UPLOAD IMAGE
 			.addCase(fetchUpload.pending, (state, action) => {
 				state.status = Status.LOADING
 				state.imageURL = ''
@@ -79,6 +82,8 @@ const cardsSlice = createSlice({
 				state.status = Status.ERROR
 				state.imageURL = ''
 			})
+
+			// CREATE CARD
 			.addCase(fetchCreate.pending, (state, action) => {
 				state.status = Status.LOADING
 			})
@@ -87,6 +92,17 @@ const cardsSlice = createSlice({
 				state.cards = [...state.cards, action.payload]
 			})
 			.addCase(fetchCreate.rejected, (state, action) => {
+				state.status = Status.ERROR
+			})
+
+			// UPDATE CARD
+			.addCase(fetchUpdate.pending, (state, action) => {
+				state.status = Status.LOADING
+			})
+			.addCase(fetchUpdate.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+			})
+			.addCase(fetchUpdate.rejected, (state, action) => {
 				state.status = Status.ERROR
 			})
 	},
