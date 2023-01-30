@@ -1,6 +1,13 @@
+import { ICard } from './../../../types/types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
-import { ICardsResponse, ICardsState, IUploadResponse, Status } from './types'
+import {
+	ICardParams,
+	ICardsResponse,
+	ICardsState,
+	IUploadResponse,
+	Status,
+} from './types'
 
 export const fetchCards = createAsyncThunk<ICardsResponse>(
 	'cards/fetchCards',
@@ -14,6 +21,14 @@ export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
 	'cards/fetchUpload',
 	async formData => {
 		const { data } = await axios.post<IUploadResponse>('/api/upload', formData)
+		return data
+	}
+)
+
+export const fetchCreate = createAsyncThunk<ICard, ICardParams>(
+	'cards/fetchCreate',
+	async params => {
+		const { data } = await axios.post<ICard>('/cards', params)
 		return data
 	}
 )
@@ -37,7 +52,7 @@ const cardsSlice = createSlice({
 		builder
 			.addCase(fetchCards.pending, (state, action) => {
 				state.status = Status.LOADING
-				state.cards = null
+				state.cards = []
 			})
 			.addCase(fetchCards.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
@@ -46,7 +61,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchCards.rejected, (state, action) => {
 				state.status = Status.ERROR
-				state.cards = null
+				state.cards = []
 			})
 			.addCase(fetchUpload.pending, (state, action) => {
 				state.status = Status.LOADING
@@ -59,6 +74,16 @@ const cardsSlice = createSlice({
 			.addCase(fetchUpload.rejected, (state, action) => {
 				state.status = Status.ERROR
 				state.imageURL = ''
+			})
+			.addCase(fetchCreate.pending, (state, action) => {
+				state.status = Status.LOADING
+			})
+			.addCase(fetchCreate.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.cards = [action.payload, ...state.cards]
+			})
+			.addCase(fetchCreate.rejected, (state, action) => {
+				state.status = Status.ERROR
 			})
 	},
 })

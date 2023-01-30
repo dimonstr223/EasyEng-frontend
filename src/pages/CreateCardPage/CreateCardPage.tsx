@@ -11,16 +11,7 @@ import useAppSelector from '../../hooks/useAppSelector'
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { imageURL } = useAppSelector(state => state.cards)
-	// interface IValues {
-	// 	word: string
-	// 	translation: string
-	// 	imageURL: string
-	// }
-	// const [{ word, translation, imageURL }, setValues] = useState<IValues>({
-	// 	word: '',
-	// 	translation: '',
-	// 	imageURL: '',
-	// })
+
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
 
@@ -31,6 +22,13 @@ const CreateCardPage: FC = () => {
 			formData.append('image', file)
 			dispatch(fetchUpload(formData))
 		}
+	}
+
+	const onSubmitClick = (
+		event: React.MouseEvent<HTMLInputElement, MouseEvent>
+	) => {
+		event.preventDefault()
+		const params = { word, translation, imageURL }
 	}
 
 	const onRemoveClick = () => {
@@ -96,7 +94,12 @@ const CreateCardPage: FC = () => {
 						</div>
 					)}
 				</div>
-				<input className={style.submitButton} type='submit' value='Create' />
+				<input
+					className={style.submitButton}
+					onClick={onSubmitClick}
+					type='submit'
+					value='Create'
+				/>
 			</form>
 		</div>
 	)

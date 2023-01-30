@@ -4,6 +4,12 @@ export interface IUploadResponse {
 	url: string
 }
 
+export interface ICardParams {
+	word: string
+	translation: string
+	imageURL: string
+}
+
 export enum Status {
 	LOADING = 'LOADING',
 	SUCCESS = 'SUCCESS',
@@ -18,6 +24,6 @@ export interface ICardsResponse {
 export interface ICardsState {
 	status: Status
 	totalCount: number
-	cards: ICard[] | null
-	imageURL: string
+	cards: ICard[] | []
+	imageURL: string | ''
 }
