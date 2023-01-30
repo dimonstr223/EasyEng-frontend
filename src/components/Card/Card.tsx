@@ -1,6 +1,9 @@
 import React from 'react'
 import useAppSelector from '../../hooks/useAppSelector'
 
+import editIcon from '../../assets/img/edit-icon.svg'
+import deleteIcon from '../../assets/img/delete-icon.svg'
+
 import style from './Card.module.scss'
 
 interface ICardProps {
@@ -20,6 +23,12 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 			onClick={() => setFlip(!flip)}
 			onMouseLeave={() => setFlip(false)}
 		>
+			{!flip && (
+				<div className={style.buttons}>
+					<img className={style.editButton} src={editIcon} alt='Edit' />
+					<img className={style.deleteButton} src={deleteIcon} alt='Delete' />
+				</div>
+			)}
 			<div className={style.back}>
 				<h3 className={style.translation}>{translation}</h3>
 			</div>

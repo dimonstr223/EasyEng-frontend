@@ -12,9 +12,11 @@ import style from './HomePage.module.scss'
 
 const HomePage: React.FC = () => {
 	const isAuth = useAppSelector(isAuthSelector)
+
 	if (isAuth) {
 		return <Navigate to='/cards' />
 	}
+
 	return (
 		<>
 			<h1 className={style.title}>Welcome</h1>

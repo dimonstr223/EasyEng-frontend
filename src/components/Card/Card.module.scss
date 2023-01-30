@@ -8,6 +8,48 @@
 	transition: transform 0.3s;
 	transform-style: preserve-3d;
 	transform: perspective(1000px) rotateY(var(--rotate-y, 0));
+
+	&:hover {
+		.buttons {
+			visibility: visible;
+		}
+	}
+
+	.buttons {
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		display: flex;
+		gap: 10px;
+		z-index: 1;
+		visibility: hidden;
+
+		.deleteButton,
+		.editButton {
+			width: 25px;
+			height: 25px;
+			animation: opac 0.3s none;
+			transition: opacity 0.3s;
+			opacity: 0.3;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+@keyframes opac {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 0.3;
+	}
 }
 
 @-moz-document url-prefix() {
