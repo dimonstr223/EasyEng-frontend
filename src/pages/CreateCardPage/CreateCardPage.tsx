@@ -2,8 +2,10 @@ import React, { FC, useRef, useState } from 'react'
 import image from '../../assets/img/header-logo.svg'
 import closeIcon from '../../assets/img/close-icon.svg'
 import style from './CreateCardPage.module.scss'
+import useAppDispatch from '../../hooks/useAppDispatch'
 
 const CreateCardPage: FC = () => {
+	const dispatch = useAppDispatch()
 	// interface IValues {
 	// 	word: string
 	// 	translation: string
