@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 import { ICardsResponse, ICardsState, IUploadResponse, Status } from './types'
 
@@ -28,7 +28,11 @@ const initialState: ICardsState = {
 const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
-	reducers: {},
+	reducers: {
+		removeImageURL: (state, action: PayloadAction) => {
+			state.imageURL = ''
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(fetchCards.pending, (state, action) => {
@@ -58,5 +62,7 @@ const cardsSlice = createSlice({
 			})
 	},
 })
+
+export const { removeImageURL } = cardsSlice.actions
 
 export default cardsSlice.reducer

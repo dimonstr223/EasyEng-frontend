@@ -1,9 +1,11 @@
 import React, { FC, useRef, useState } from 'react'
-import image from '../../assets/img/header-logo.svg'
 import closeIcon from '../../assets/img/close-icon.svg'
 import style from './CreateCardPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
-import { fetchUpload } from '../../redux/slices/cards/cardsSlice'
+import {
+	fetchUpload,
+	removeImageURL,
+} from '../../redux/slices/cards/cardsSlice'
 import useAppSelector from '../../hooks/useAppSelector'
 
 const CreateCardPage: FC = () => {
@@ -29,6 +31,10 @@ const CreateCardPage: FC = () => {
 			formData.append('image', file)
 			dispatch(fetchUpload(formData))
 		}
+	}
+
+	const onRemoveClick = () => {
+		dispatch(removeImageURL())
 	}
 
 	const addImageRef = useRef<HTMLInputElement>(null)
