@@ -2,25 +2,24 @@ import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Form } from './types'
-
-import logo from '../../assets/img/header-logo.svg'
-import closeIcon from '../../assets/img/close-icon.svg'
-import style from './RegisterPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import useAppSelector from '../../hooks/useAppSelector'
-import { fetchUploadAva, setAvatarURL } from '../../redux/slices/auth/authSlice'
+import {
+	fetchSingUp,
+	fetchUploadAva,
+	isAuthSelector,
+	setAvatarURL,
+} from '../../redux/slices/auth/authSlice'
+
+import closeIcon from '../../assets/img/close-icon.svg'
+import style from './RegisterPage.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterPage: React.FC = () => {
 	const dispatch = useAppDispatch()
+	const isAuth = useAppSelector(isAuthSelector)
 	const { avatarURL } = useAppSelector(state => state.auth)
-	const addAvatarRef = useRef<HTMLInputElement>(null)
-
-	const onAvatarClick = (event: React.MouseEvent) => {
-		event.preventDefault()
-		if (addAvatarRef.current) {
-			addAvatarRef.current.click()
-		}
-	}
+	const navigate = useNavigate()
 
 	const avatarUploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files) {
@@ -38,14 +37,22 @@ const RegisterPage: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors, isValid },
 	} = useForm<Form>({
 		mode: 'onBlur',
 	})
 
 	const onSubmit = handleSubmit(values => {
-		console.log(values)
+		const params = { ...values, avatar: avatarURL }
+		dispatch(fetchSingUp(params))
+		reset()
+		dispatch(setAvatarURL(''))
 	})
+
+	if (isAuth) {
+		navigate('/cards')
+	}
 	return (
 		<div className={style.registerContainer}>
 			<h1 className={style.title}>Registration</h1>
@@ -75,14 +82,16 @@ const RegisterPage: React.FC = () => {
 					{errors.password && <div className={style.error}>Enter password</div>}
 				</div>
 				<div className={style.uploadAvatar}>
-					<button className={style.uploadButton} onClick={onAvatarClick}>
-						Add avatar
-					</button>
+					<label className={style.uploadButton} htmlFor='uploadInput'>
+						Add Avatar
+					</label>
 					<input
 						className={style.uploadInput}
-						ref={addAvatarRef}
-						onChange={avatarUploadHandler}
+						id='uploadInput'
 						type='file'
+						{...register('avatar', {
+							onChange: avatarUploadHandler,
+						})}
 					/>
 					{avatarURL && (
 						<div className={style.avatarWrapper}>
