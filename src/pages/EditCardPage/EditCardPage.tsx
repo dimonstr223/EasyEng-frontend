@@ -1,8 +1,9 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useRef, useState, useEffect } from 'react'
 import closeIcon from '../../assets/img/close-icon.svg'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import {
 	fetchCreate,
+	fetchOneCard,
 	fetchUpload,
 	removeImageURL,
 } from '../../redux/slices/cards/cardsSlice'
@@ -13,10 +14,14 @@ import style from './EditCardPage.module.scss'
 
 const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
-	const { imageURL } = useAppSelector(state => state.cards)
+	const { imageURL, card } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
 	const { id } = useParams()
-	console.log(id)
+
+	useEffect(() => {
+		//@ts-ignore
+		dispatch(fetchOneCard(id))
+	}, [])
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
@@ -62,7 +67,7 @@ const EditCardPage: FC = () => {
 					<label>Foreign word</label>
 					<input
 						className={style.input}
-						value={word}
+						value={card?.word}
 						onChange={e => setWord(e.target.value)}
 						type='text'
 					/>
@@ -71,7 +76,7 @@ const EditCardPage: FC = () => {
 					<label>Translation</label>
 					<input
 						className={style.input}
-						value={translation}
+						value={card?.translation}
 						onChange={e => setTranslation(e.target.value)}
 						type='text'
 					/>
@@ -86,11 +91,11 @@ const EditCardPage: FC = () => {
 						onChange={handleImageUpload}
 						type='file'
 					/>
-					{imageURL && (
+					{card?.imageURL && (
 						<div className={style.imgWrapper}>
 							<img
 								className={style.image}
-								src={`http://localhost:5555${imageURL}`}
+								src={`http://localhost:5555${card?.imageURL}`}
 								alt='Illustration'
 							/>
 							<img
@@ -106,7 +111,7 @@ const EditCardPage: FC = () => {
 					className={style.submitButton}
 					onClick={onSubmitClick}
 					type='submit'
-					value='Create'
+					value='Edit'
 				/>
 			</form>
 		</div>
