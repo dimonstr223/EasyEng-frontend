@@ -36,6 +36,23 @@ export const fetchUploadAva = createAsyncThunk<IUploadResponse, FormData>(
 	}
 )
 
+interface IUserParams {
+	username?: string
+	avatar?: string
+}
+
+interface IUserUpdate {
+	id: string
+	body: IUserParams
+}
+export const fetchUpdateUser = createAsyncThunk<IMe, IUserUpdate>(
+	'auth/fetchUpdateUser',
+	async ({ id, body }) => {
+		const { data } = await axios.patch<IMe>(`/auth/users/${id}`, body)
+		return data
+	}
+)
+
 const initialState: AuthState = {
 	status: Status.LOADING,
 	me: null,
@@ -122,6 +139,18 @@ const authSlice = createSlice({
 			.addCase(fetchMe.rejected, (state, action) => {
 				state.status = Status.ERROR
 				state.me = null
+			})
+
+			// UPDATE USER
+			.addCase(fetchUpdateUser.pending, (state, action) => {
+				state.status = Status.LOADING
+			})
+			.addCase(fetchUpdateUser.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.me = action.payload
+			})
+			.addCase(fetchUpdateUser.rejected, (state, action) => {
+				state.status = Status.ERROR
 			})
 	},
 })
