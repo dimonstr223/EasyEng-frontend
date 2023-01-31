@@ -38,23 +38,17 @@ const EditCardPage: FC = () => {
 			const formData = new FormData()
 			const file = event.target.files[0]
 			formData.append('image', file)
-
-			// await axios.post('/api/upload', formData).then(({ data }) => {
-			// 	console.log(data)
-			// 	dispatch(setImageURL(data.url))
-			// })
-
 			dispatch(fetchUpload(formData))
 		}
 	}
 
-	const onSubmitClick = (
+	const onSubmitClick = async (
 		event: React.MouseEvent<HTMLInputElement, MouseEvent>
 	) => {
 		event.preventDefault()
 
 		if (id) {
-			dispatch(fetchUpdate({ id, body: { word, translation, imageURL } }))
+			await dispatch(fetchUpdate({ id, body: { word, translation, imageURL } }))
 		}
 		navigate('/cards')
 	}

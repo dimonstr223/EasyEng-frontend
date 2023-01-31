@@ -120,6 +120,7 @@ const cardsSlice = createSlice({
 			.addCase(fetchCreate.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				state.cards = [...state.cards, action.payload]
+				state.imageURL = ''
 			})
 			.addCase(fetchCreate.rejected, (state, action) => {
 				state.status = Status.ERROR
@@ -131,6 +132,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchUpdate.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
+				state.imageURL = ''
 			})
 			.addCase(fetchUpdate.rejected, (state, action) => {
 				state.status = Status.ERROR
