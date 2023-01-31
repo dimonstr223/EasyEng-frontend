@@ -31,7 +31,7 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 			onClick={() => setFlip(!flip)}
 			onMouseLeave={() => setFlip(false)}
 		>
-			{!flip && (
+			{!flip && _id !== '0' && (
 				<div className={style.buttons}>
 					<img
 						className={style.editButton}
