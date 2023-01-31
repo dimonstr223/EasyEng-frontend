@@ -7,7 +7,12 @@ export interface IUploadResponse {
 export interface ICardParams {
 	word: string
 	translation: string
-	imageURL: string
+	imageURL?: string
+}
+
+export interface IUpdateParams {
+	_id: string
+	body: ICardParams
 }
 
 export enum Status {

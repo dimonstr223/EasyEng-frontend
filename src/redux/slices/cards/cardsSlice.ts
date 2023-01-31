@@ -5,6 +5,7 @@ import {
 	ICardParams,
 	ICardsResponse,
 	ICardsState,
+	IUpdateParams,
 	IUploadResponse,
 	Status,
 } from './types'
@@ -16,10 +17,13 @@ export const fetchCards = createAsyncThunk<ICardsResponse>(
 		return data
 	}
 )
-export const fetchOneCard = createAsyncThunk('cards/fetchOneCard', async id => {
-	const { data } = await axios.get<ICard>(`/api/cards/${id}`)
-	return data
-})
+export const fetchOneCard = createAsyncThunk<ICard, string>(
+	'cards/fetchOneCard',
+	async id => {
+		const { data } = await axios.get<ICard>(`/api/cards/${id}`)
+		return data
+	}
+)
 export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
 	'cards/fetchUpload',
 	async formData => {
@@ -36,8 +40,8 @@ export const fetchCreate = createAsyncThunk<ICard, ICardParams>(
 )
 export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(
 	'cards/fetchUpdate',
-	async ({ _id, body }) => {
-		const { data } = await axios.put<ICard>(`/api/cards/${_id}`, body)
+	async (id, body) => {
+		const { data } = await axios.put<ICard>(`/api/cards/${id}`, body)
 		return data
 	}
 )
@@ -48,11 +52,6 @@ const initialState: ICardsState = {
 	cards: [],
 	imageURL: '',
 	card: null,
-}
-
-interface IUpdateParams {
-	_id: string
-	body: ICardParams
 }
 
 const cardsSlice = createSlice({
