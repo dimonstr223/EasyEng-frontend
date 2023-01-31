@@ -5,7 +5,7 @@ import useAppDispatch from '../../hooks/useAppDispatch'
 import {
 	fetchCreate,
 	fetchUpload,
-	removeImageURL,
+	setImageURL,
 } from '../../redux/slices/cards/cardsSlice'
 import useAppSelector from '../../hooks/useAppSelector'
 import { useNavigate } from 'react-router-dom'
@@ -37,7 +37,7 @@ const CreateCardPage: FC = () => {
 	}
 
 	const onRemoveClick = () => {
-		dispatch(removeImageURL())
+		dispatch(setImageURL(''))
 	}
 
 	const addImageRef = useRef<HTMLInputElement>(null)

@@ -11,7 +11,7 @@ export interface ICardParams {
 }
 
 export interface IUpdateParams {
-	_id: string
+	id: string
 	body: ICardParams
 }
 
@@ -30,6 +30,6 @@ export interface ICardsState {
 	status: Status
 	totalCount: number
 	cards: ICard[] | []
-	imageURL: string | ''
+	imageURL: string
 	card: ICard | null
 }

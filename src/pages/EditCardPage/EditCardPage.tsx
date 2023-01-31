@@ -4,59 +4,64 @@ import useAppDispatch from '../../hooks/useAppDispatch'
 import {
 	fetchUpdate,
 	fetchUpload,
-	removeImageURL,
+	setImageURL,
 } from '../../redux/slices/cards/cardsSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import style from './EditCardPage.module.scss'
-import { ICardParams } from '../../redux/slices/cards/types'
 import axios from '../../axios/axios'
+import useAppSelector from '../../hooks/useAppSelector'
 
 const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
+	const { imageURL } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
 	const { id } = useParams()
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
-	const [imageURL, setImageURL] = useState('')
+	// const [image, setImage] = useState('')
 
 	useEffect(() => {
 		id &&
 			axios.get(`/api/cards/${id}`).then(({ data }) => {
 				setWord(data.word)
 				setTranslation(data.translation)
-				setImageURL(data.imageURL)
+				dispatch(setImageURL(data.imageURL))
 			})
 	}, [])
 
-	const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleImageUpload = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		if (event.target.files) {
 			const formData = new FormData()
 			const file = event.target.files[0]
 			formData.append('image', file)
+
+			// await axios.post('/api/upload', formData).then(({ data }) => {
+			// 	console.log(data)
+			// 	dispatch(setImageURL(data.url))
+			// })
+
 			dispatch(fetchUpload(formData))
-			setWord('')
-			setTranslation('')
 		}
 	}
 
-	const onSubmitClick = async (
+	const onSubmitClick = (
 		event: React.MouseEvent<HTMLInputElement, MouseEvent>
 	) => {
 		event.preventDefault()
-		const body: ICardParams = {
-			word,
-			translation,
-			imageURL,
+
+		if (id) {
+			dispatch(fetchUpdate({ id, body: { word, translation, imageURL } }))
 		}
-		//@ts-ignore
-		await dispatch(fetchUpdate(id, body))
 		navigate('/cards')
 	}
 
 	const onRemoveClick = () => {
-		dispatch(removeImageURL())
+		dispatch(setImageURL(''))
+		// setImage('')
 	}
 
 	const addImageRef = useRef<HTMLInputElement>(null)

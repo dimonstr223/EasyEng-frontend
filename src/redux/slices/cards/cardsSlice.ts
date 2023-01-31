@@ -40,7 +40,7 @@ export const fetchCreate = createAsyncThunk<ICard, ICardParams>(
 )
 export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(
 	'cards/fetchUpdate',
-	async (id, body) => {
+	async ({ id, body }) => {
 		const { data } = await axios.put<ICard>(`/api/cards/${id}`, body)
 		return data
 	}
@@ -58,8 +58,8 @@ const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
 	reducers: {
-		removeImageURL: (state, action: PayloadAction) => {
-			state.imageURL = ''
+		setImageURL: (state, { payload }) => {
+			state.imageURL = payload
 		},
 	},
 	extraReducers: builder => {
@@ -131,6 +131,6 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { removeImageURL } = cardsSlice.actions
+export const { setImageURL } = cardsSlice.actions
 
 export default cardsSlice.reducer
