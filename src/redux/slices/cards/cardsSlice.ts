@@ -45,6 +45,13 @@ export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(
 		return data
 	}
 )
+export const fetchDelete = createAsyncThunk<void, string>(
+	'cards/fetchDelete',
+	async id => {
+		const { data } = await axios.delete(`/api/cards${id}`)
+		return data
+	}
+)
 
 const initialState: ICardsState = {
 	status: Status.LOADING,
@@ -126,6 +133,17 @@ const cardsSlice = createSlice({
 				state.status = Status.SUCCESS
 			})
 			.addCase(fetchUpdate.rejected, (state, action) => {
+				state.status = Status.ERROR
+			})
+
+			// DELTE CARD
+			.addCase(fetchDelete.pending, (state, action) => {
+				state.status = Status.LOADING
+			})
+			.addCase(fetchDelete.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+			})
+			.addCase(fetchDelete.rejected, (state, action) => {
 				state.status = Status.ERROR
 			})
 	},
