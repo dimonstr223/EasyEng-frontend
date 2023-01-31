@@ -6,6 +6,8 @@ import editIcon from '../../assets/img/edit-icon.svg'
 import deleteIcon from '../../assets/img/delete-icon.svg'
 
 import style from './Card.module.scss'
+import useAppDispatch from '../../hooks/useAppDispatch'
+import { fetchDelete } from '../../redux/slices/cards/cardsSlice'
 
 interface ICardProps {
 	word: string
@@ -15,6 +17,7 @@ interface ICardProps {
 }
 
 const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
 	const [flip, setFlip] = React.useState(false)
@@ -22,10 +25,17 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 	const onEditClick = (
 		event: React.MouseEvent<HTMLImageElement, MouseEvent>
 	) => {
-		event.preventDefault()
 		navigate(`/edit-card/${_id}`)
 	}
 
+	const onDeleteClick = (
+		event: React.MouseEvent<HTMLImageElement, MouseEvent>
+	) => {
+		event.stopPropagation()
+		if (window.confirm('Are you shure delete card?')) {
+			dispatch(fetchDelete(_id))
+		}
+	}
 	// const { cards } = useAppSelector(state => state.cards)
 
 	return (
@@ -42,7 +52,12 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 						alt='Edit'
 						onClick={onEditClick}
 					/>
-					<img className={style.deleteButton} src={deleteIcon} alt='Delete' />
+					<img
+						className={style.deleteButton}
+						src={deleteIcon}
+						onClick={onDeleteClick}
+						alt='Delete'
+					/>
 				</div>
 			)}
 			<div className={style.back}>

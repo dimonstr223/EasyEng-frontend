@@ -48,7 +48,7 @@ export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(
 export const fetchDelete = createAsyncThunk<void, string>(
 	'cards/fetchDelete',
 	async id => {
-		const { data } = await axios.delete(`/api/cards${id}`)
+		const { data } = await axios.delete(`/api/cards/${id}`)
 		return data
 	}
 )
@@ -142,6 +142,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchDelete.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
+				state.cards = state.cards.filter(item => item._id !== action.meta.arg)
 			})
 			.addCase(fetchDelete.rejected, (state, action) => {
 				state.status = Status.ERROR
