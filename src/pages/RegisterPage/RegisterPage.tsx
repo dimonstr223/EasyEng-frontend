@@ -8,7 +8,7 @@ import closeIcon from '../../assets/img/close-icon.svg'
 import style from './RegisterPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import useAppSelector from '../../hooks/useAppSelector'
-import { fetchUploadAva } from '../../redux/slices/auth/authSlice'
+import { fetchUploadAva, setAvatarURL } from '../../redux/slices/auth/authSlice'
 
 const RegisterPage: React.FC = () => {
 	const dispatch = useAppDispatch()
@@ -29,6 +29,10 @@ const RegisterPage: React.FC = () => {
 			formData.append('avatar', file)
 			dispatch(fetchUploadAva(formData))
 		}
+	}
+
+	const onCloseClick = () => {
+		dispatch(setAvatarURL(''))
 	}
 
 	const {
@@ -91,6 +95,7 @@ const RegisterPage: React.FC = () => {
 								className={style.removeButton}
 								src={closeIcon}
 								alt='remove'
+								onClick={onCloseClick}
 							/>
 						</div>
 					)}

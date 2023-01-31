@@ -46,7 +46,11 @@ const initialState: AuthState = {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAvatarURL(state, action) {
+			state.avatarURL = action.payload
+		},
+	},
 	extraReducers: builder => {
 		builder
 
@@ -124,5 +128,7 @@ const authSlice = createSlice({
 })
 
 export const isAuthSelector = (state: RootState) => Boolean(state.auth.me)
+
+export const { setAvatarURL } = authSlice.actions
 
 export default authSlice.reducer
