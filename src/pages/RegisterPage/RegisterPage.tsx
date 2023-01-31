@@ -6,8 +6,13 @@ import { Form } from './types'
 import logo from '../../assets/img/header-logo.svg'
 import closeIcon from '../../assets/img/close-icon.svg'
 import style from './RegisterPage.module.scss'
+import useAppDispatch from '../../hooks/useAppDispatch'
+import useAppSelector from '../../hooks/useAppSelector'
+import { fetchUploadAva } from '../../redux/slices/auth/authSlice'
 
 const RegisterPage: React.FC = () => {
+	const dispatch = useAppDispatch()
+	const { avatarURL } = useAppSelector(state => state.auth)
 	const addAvatarRef = useRef<HTMLInputElement>(null)
 
 	const onAvatarClick = (event: React.MouseEvent) => {
@@ -22,6 +27,7 @@ const RegisterPage: React.FC = () => {
 			const formData = new FormData()
 			const file = event.target.files[0]
 			formData.append('avatar', file)
+			dispatch(fetchUploadAva(formData))
 		}
 	}
 
@@ -74,10 +80,20 @@ const RegisterPage: React.FC = () => {
 						onChange={avatarUploadHandler}
 						type='file'
 					/>
-					<div className={style.avatarWrapper}>
-						<img className={style.image} src={logo} alt='Illustration' />
-						<img className={style.removeButton} src={closeIcon} alt='remove' />
-					</div>
+					{avatarURL && (
+						<div className={style.avatarWrapper}>
+							<img
+								className={style.image}
+								src={`http://localhost:5555${avatarURL}`}
+								alt='Illustration'
+							/>
+							<img
+								className={style.removeButton}
+								src={closeIcon}
+								alt='remove'
+							/>
+						</div>
+					)}
 				</div>
 				<input
 					className={style.submitButton}
