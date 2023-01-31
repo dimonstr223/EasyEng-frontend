@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { FormData } from './types'
+import { Form } from './types'
 
 import logo from '../../assets/img/header-logo.svg'
 import closeIcon from '../../assets/img/close-icon.svg'
@@ -17,11 +17,19 @@ const RegisterPage: React.FC = () => {
 		}
 	}
 
+	const avatarUploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files) {
+			const formData = new FormData()
+			const file = event.target.files[0]
+			formData.append('avatar', file)
+		}
+	}
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isValid },
-	} = useForm<FormData>({
+	} = useForm<Form>({
 		mode: 'onBlur',
 	})
 
@@ -60,7 +68,12 @@ const RegisterPage: React.FC = () => {
 					<button className={style.uploadButton} onClick={onAvatarClick}>
 						Add avatar
 					</button>
-					<input className={style.uploadInput} ref={addAvatarRef} type='file' />
+					<input
+						className={style.uploadInput}
+						ref={addAvatarRef}
+						onChange={avatarUploadHandler}
+						type='file'
+					/>
 					<div className={style.avatarWrapper}>
 						<img className={style.image} src={logo} alt='Illustration' />
 						<img className={style.removeButton} src={closeIcon} alt='remove' />
