@@ -7,6 +7,7 @@ export interface IAuthResponse {
 export interface IMe {
 	_id: string
 	username: string
+	avatar: string
 }
 
 export interface AuthState {
