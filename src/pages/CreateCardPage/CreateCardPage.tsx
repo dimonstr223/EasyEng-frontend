@@ -1,6 +1,5 @@
 import React, { FC, useRef, useState } from 'react'
 import closeIcon from '../../assets/img/close-icon.svg'
-import style from './CreateCardPage.module.scss'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import {
 	fetchCreate,
@@ -9,6 +8,8 @@ import {
 } from '../../redux/slices/cards/cardsSlice'
 import useAppSelector from '../../hooks/useAppSelector'
 import { useNavigate } from 'react-router-dom'
+
+import style from './CreateCardPage.module.scss'
 
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
