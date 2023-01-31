@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 
 import { FormData as Form } from '../../../pages/LoginPage/types'
+import { IUploadResponse } from '../../../types/types'
 import { RootState } from '../../store'
 import { AuthState, IAuthResponse, Status, IMe } from './types'
 
@@ -12,7 +13,6 @@ export const fetchLogin = createAsyncThunk<IAuthResponse, Form>(
 		return data
 	}
 )
-
 export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
 	'auth/fetchSignUp',
 	async params => {
@@ -20,20 +20,27 @@ export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
 		return data
 	}
 )
-
 export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
 	const { data } = await axios.delete('/auth/logout')
 	return data
 })
-
 export const fetchMe = createAsyncThunk<IMe>('auth/fetchMe', async () => {
 	const { data } = await axios.get<IMe>('/auth/me')
 	return data
 })
 
+export const fetchUploadAva = createAsyncThunk<IUploadResponse, FormData>(
+	'auth/fetchUploadAva',
+	async formData => {
+		const { data } = await axios.post<IUploadResponse>('/auth/upload', formData)
+		return data
+	}
+)
+
 const initialState: AuthState = {
 	status: Status.LOADING,
 	me: null,
+	avatarURL: '',
 }
 
 const authSlice = createSlice({
@@ -69,6 +76,19 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchSingUp.rejected, (state, action) => {
 				state.status = Status.ERROR
+			})
+
+			//AVATAR UPLOAD
+			.addCase(fetchUploadAva.pending, (state, action) => {
+				state.status = Status.LOADING
+			})
+			.addCase(fetchUploadAva.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.avatarURL = action.payload.url
+			})
+			.addCase(fetchUploadAva.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.avatarURL = ''
 			})
 
 			// LOGOUT

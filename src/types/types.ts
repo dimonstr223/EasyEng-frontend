@@ -10,3 +10,7 @@ export interface ICard {
 	imageURL?: string
 	user: IUser
 }
+
+export interface IUploadResponse {
+	url: string
+}

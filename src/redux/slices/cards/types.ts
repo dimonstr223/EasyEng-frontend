@@ -1,9 +1,5 @@
 import { ICard } from './../../../types/types'
 
-export interface IUploadResponse {
-	url: string
-}
-
 export interface ICardParams {
 	word: string
 	translation: string

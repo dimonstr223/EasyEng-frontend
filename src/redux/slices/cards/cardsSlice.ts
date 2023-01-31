@@ -1,4 +1,4 @@
-import { ICard } from './../../../types/types'
+import { ICard, IUploadResponse } from './../../../types/types'
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 import {
@@ -6,7 +6,6 @@ import {
 	ICardsResponse,
 	ICardsState,
 	IUpdateParams,
-	IUploadResponse,
 	Status,
 } from './types'
 

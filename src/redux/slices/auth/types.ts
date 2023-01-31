@@ -12,6 +12,7 @@ export interface IMe {
 export interface AuthState {
 	status: Status
 	me: IMe | null
+	avatarURL: string
 }
 
 export enum Status {
