@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import useAppSelector from '../../hooks/useAppSelector'
 
 import editIcon from '../../assets/img/edit-icon.svg'
@@ -14,6 +15,13 @@ interface ICardProps {
 }
 
 const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
+	const navigate = useNavigate()
+	const onEditClick = (
+		event: React.MouseEvent<HTMLImageElement, MouseEvent>
+	) => {
+		event.preventDefault()
+		navigate('/edit-card')
+	}
 	// const { cards } = useAppSelector(state => state.cards)
 	const [flip, setFlip] = React.useState(false)
 
@@ -25,7 +33,12 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 		>
 			{!flip && (
 				<div className={style.buttons}>
-					<img className={style.editButton} src={editIcon} alt='Edit' />
+					<img
+						className={style.editButton}
+						src={editIcon}
+						alt='Edit'
+						onClick={onEditClick}
+					/>
 					<img className={style.deleteButton} src={deleteIcon} alt='Delete' />
 				</div>
 			)}
@@ -36,7 +49,10 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 				<h3 className={style.word}>{word}</h3>
 				{imageURL && (
 					<div className={style.imgWrapper}>
-						<img src={`http://localhost:5555${imageURL}`} alt='Illustration' />
+						<img
+							src={_id === '0' ? imageURL : `http://localhost:5555${imageURL}`}
+							alt='Illustration'
+						/>
 					</div>
 				)}
 			</div>

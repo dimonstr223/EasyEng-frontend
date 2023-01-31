@@ -36,10 +36,15 @@ const initialState: ICardsState = {
 	cards: [],
 	imageURL: '',
 }
-export const fetchUpdate = createAsyncThunk<ICard>(
+
+interface IUpdateParams {
+	_id: string
+	body: ICardParams
+}
+export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(	
 	'cards/fetchUpdate',
-	async (id, params) => {
-		const { data } = await axios.put<ICard>(`/api/cards/${id}`, params)
+	async ({ _id, body }) => {
+		const { data } = await axios.put<ICard>(`/api/cards/${_id}`, body)
 		return data
 	}
 )

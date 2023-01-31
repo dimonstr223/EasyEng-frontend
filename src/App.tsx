@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import useAppDispatch from './hooks/useAppDispatch'
 import CardsPage from './pages/CardsPage/CardsPage'
 import CreateCardPage from './pages/CreateCardPage/CreateCardPage'
+import EditCardPage from './pages/EditCardPage/EditCardPage'
 
 import HomePage from './pages/HomePage/HomePage'
 import Layout from './pages/Layout/Layout'
@@ -29,6 +30,7 @@ const App: React.FC = () => {
 					<Route path='/login' element={<LoginPage />} />
 					<Route path='/register' element={<RegisterPage />} />
 					<Route path='/create-card' element={<CreateCardPage />} />
+					<Route path='/edit-card' element={<EditCardPage />} />
 				</Route>
 			</Routes>
 		</div>

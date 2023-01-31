@@ -13,7 +13,7 @@ const CardsPage: React.FC = () => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
-	const { cards, status } = useAppSelector(state => state.cards)
+	const { cards } = useAppSelector(state => state.cards)
 
 	useEffect(() => {
 		dispatch(fetchCards())
