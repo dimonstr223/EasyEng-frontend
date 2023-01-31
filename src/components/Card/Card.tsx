@@ -20,7 +20,7 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 		event: React.MouseEvent<HTMLImageElement, MouseEvent>
 	) => {
 		event.preventDefault()
-		navigate('/edit-card')
+		navigate(`/edit-card/${_id}`)
 	}
 	// const { cards } = useAppSelector(state => state.cards)
 	const [flip, setFlip] = React.useState(false)
