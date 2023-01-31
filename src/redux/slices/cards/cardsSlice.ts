@@ -16,6 +16,13 @@ export const fetchCards = createAsyncThunk<ICardsResponse>(
 		return data
 	}
 )
+export const fetchOneCard = createAsyncThunk<ICard>(
+	'cards/fetchOneCard',
+	async id => {
+		const { data } = await axios.get<ICard>(`/api/cards/${id}`)
+		return data
+	}
+)
 export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
 	'cards/fetchUpload',
 	async formData => {
@@ -35,13 +42,14 @@ const initialState: ICardsState = {
 	totalCount: 0,
 	cards: [],
 	imageURL: '',
+	card: null,
 }
 
 interface IUpdateParams {
 	_id: string
 	body: ICardParams
 }
-export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(	
+export const fetchUpdate = createAsyncThunk<ICard, IUpdateParams>(
 	'cards/fetchUpdate',
 	async ({ _id, body }) => {
 		const { data } = await axios.put<ICard>(`/api/cards/${_id}`, body)
@@ -72,6 +80,19 @@ const cardsSlice = createSlice({
 			.addCase(fetchCards.rejected, (state, action) => {
 				state.status = Status.ERROR
 				state.cards = []
+			})
+			// FETCH ONE CARD
+			.addCase(fetchOneCard.pending, (state, action) => {
+				state.status = Status.LOADING
+				state.card = null
+			})
+			.addCase(fetchOneCard.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.card = action.payload
+			})
+			.addCase(fetchOneCard.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.card = null
 			})
 
 			// UPLOAD IMAGE

@@ -26,4 +26,5 @@ export interface ICardsState {
 	totalCount: number
 	cards: ICard[] | []
 	imageURL: string | ''
+	card: ICard | null
 }

@@ -7,7 +7,7 @@ import {
 	removeImageURL,
 } from '../../redux/slices/cards/cardsSlice'
 import useAppSelector from '../../hooks/useAppSelector'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import style from './EditCardPage.module.scss'
 
@@ -15,6 +15,8 @@ const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { imageURL } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
+	const { id } = useParams()
+	console.log(id)
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
