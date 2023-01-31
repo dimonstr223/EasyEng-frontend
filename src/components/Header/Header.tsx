@@ -5,6 +5,7 @@ import headerLogo from '../../assets/img/header-logo.svg'
 import useAppDispatch from '../../hooks/useAppDispatch'
 import useAppSelector from '../../hooks/useAppSelector'
 import { fetchLogout, isAuthSelector } from '../../redux/slices/auth/authSlice'
+import UserData from '../UserData/UserData'
 
 import style from './Header.module.scss'
 
@@ -26,6 +27,7 @@ const Header: React.FC = () => {
 					<h3 className={style.title}>EasyLang</h3>
 				</div>
 			</Link>
+			{isAuth && <UserData />}
 			<div className={style.authButtons}>
 				{isAuth ? (
 					<>
