@@ -1,57 +1,17 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from '../../../axios/axios'
+import { createSlice } from '@reduxjs/toolkit'
 
-import { FormData as Form } from '../../../pages/LoginPage/types'
-import { IUploadResponse } from '../../../types/types'
+import {
+	fetchLogin,
+	fetchSingUp,
+	fetchUploadAva,
+	fetchLogout,
+	fetchMe,
+	fetchUpdateUser,
+} from './../asyncThunks/authAsyncThunks'
+
 import { RootState } from '../../store'
-import { AuthState, IAuthResponse, Status, IMe } from './types'
-
-export const fetchLogin = createAsyncThunk<IAuthResponse, Form>(
-	'auth/fethchAuth',
-	async params => {
-		const { data } = await axios.post<IAuthResponse>('/auth/login', params)
-		return data
-	}
-)
-export const fetchSingUp = createAsyncThunk<IAuthResponse, Form>(
-	'auth/fetchSignUp',
-	async params => {
-		const { data } = await axios.post<IAuthResponse>('/auth/signup', params)
-		return data
-	}
-)
-export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
-	const { data } = await axios.delete('/auth/logout')
-	return data
-})
-export const fetchMe = createAsyncThunk<IMe>('auth/fetchMe', async () => {
-	const { data } = await axios.get<IMe>('/auth/me')
-	return data
-})
-export const fetchUploadAva = createAsyncThunk<IUploadResponse, FormData>(
-	'auth/fetchUploadAva',
-	async formData => {
-		const { data } = await axios.post<IUploadResponse>('/auth/upload', formData)
-		return data
-	}
-)
-
-interface IUserParams {
-	username?: string
-	avatar?: string
-}
-
-interface IUserUpdate {
-	id: string
-	body: IUserParams
-}
-export const fetchUpdateUser = createAsyncThunk<IMe, IUserUpdate>(
-	'auth/fetchUpdateUser',
-	async ({ id, body }) => {
-		const { data } = await axios.patch<IMe>(`/auth/users/${id}`, body)
-		return data
-	}
-)
+import { AuthState } from '../types/authTypes'
+import { Status } from '../../../types/types'
 
 const initialState: AuthState = {
 	status: Status.LOADING,
@@ -108,7 +68,7 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchUploadAva.rejected, (state, action) => {
 				state.status = Status.ERROR
-				state.avatarURL = ''
+				// state.avatarURL = ''
 			})
 
 			// LOGOUT
@@ -147,7 +107,9 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchUpdateUser.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.me = action.payload
+				if (state.me) {
+					state.me = action.payload
+				}
 			})
 			.addCase(fetchUpdateUser.rejected, (state, action) => {
 				state.status = Status.ERROR

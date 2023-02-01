@@ -9,8 +9,8 @@ import EditCardPage from './pages/EditCardPage/EditCardPage'
 import HomePage from './pages/HomePage/HomePage'
 import Layout from './pages/Layout/Layout'
 import LoginPage from './pages/LoginPage/LoginPage'
-import RegisterPage from './pages/RegisterPage/RegisterPage'
-import { fetchMe } from './redux/slices/auth/authSlice'
+import SignUpPage from './pages/SignUpPage/SignUpPage'
+import { fetchMe } from './redux/auth/asyncThunks/authAsyncThunks'
 
 import './scss/App.scss'
 
@@ -28,7 +28,7 @@ const App: React.FC = () => {
 					<Route index element={<HomePage />} />
 					<Route path='/cards' element={<CardsPage />} />
 					<Route path='/login' element={<LoginPage />} />
-					<Route path='/register' element={<RegisterPage />} />
+					<Route path='/signup' element={<SignUpPage />} />
 					<Route path='/create-card' element={<CreateCardPage />} />
 					<Route path='/edit-card/:id' element={<EditCardPage />} />
 				</Route>

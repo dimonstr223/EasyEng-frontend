@@ -1,13 +1,14 @@
 import React, { FC, useRef, useState } from 'react'
-import closeIcon from '../../assets/img/close-icon.svg'
-import useAppDispatch from '../../hooks/useAppDispatch'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+
 import {
 	fetchCreate,
 	fetchUpload,
-	setImageURL,
-} from '../../redux/slices/cards/cardsSlice'
-import useAppSelector from '../../hooks/useAppSelector'
-import { useNavigate } from 'react-router-dom'
+} from '../../redux/cards/asyncThunks/cardsAsyncThunks'
+import { setImageURL } from '../../redux/cards/slices/cardsSlice'
+
+import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './CreateCardPage.module.scss'
 
@@ -15,6 +16,7 @@ const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { imageURL } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
+	const addImageRef = useRef<HTMLInputElement>(null)
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
@@ -40,8 +42,6 @@ const CreateCardPage: FC = () => {
 	const onRemoveClick = () => {
 		dispatch(setImageURL(''))
 	}
-
-	const addImageRef = useRef<HTMLInputElement>(null)
 
 	const onClickAddImage = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>

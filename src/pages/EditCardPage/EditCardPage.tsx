@@ -1,26 +1,27 @@
 import React, { FC, useRef, useState, useEffect } from 'react'
-import closeIcon from '../../assets/img/close-icon.svg'
-import useAppDispatch from '../../hooks/useAppDispatch'
+import axios from '../../axios/axios'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { setImageURL } from '../../redux/cards/slices/cardsSlice'
 import {
 	fetchUpdate,
 	fetchUpload,
-	setImageURL,
-} from '../../redux/slices/cards/cardsSlice'
-import { useNavigate, useParams } from 'react-router-dom'
+} from '../../redux/cards/asyncThunks/cardsAsyncThunks'
+
+import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './EditCardPage.module.scss'
-import axios from '../../axios/axios'
-import useAppSelector from '../../hooks/useAppSelector'
 
 const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const { imageURL } = useAppSelector(state => state.cards)
+	const addImageRef = useRef<HTMLInputElement>(null)
 	const navigate = useNavigate()
 	const { id } = useParams()
 
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
-	// const [image, setImage] = useState('')
 
 	useEffect(() => {
 		id &&
@@ -55,10 +56,7 @@ const EditCardPage: FC = () => {
 
 	const onRemoveClick = () => {
 		dispatch(setImageURL(''))
-		// setImage('')
 	}
-
-	const addImageRef = useRef<HTMLInputElement>(null)
 
 	const onClickAddImage = (
 		e: React.MouseEvent<HTMLButtonElement, MouseEvent>

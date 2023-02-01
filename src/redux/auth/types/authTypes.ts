@@ -1,3 +1,6 @@
+import { Status } from '../../../types/types'
+import { IUserParams } from '../../users/types/usersTypes'
+
 export interface IAuthResponse {
 	accessToken: string
 	refreshToken: string
@@ -16,8 +19,12 @@ export interface AuthState {
 	avatarURL: string
 }
 
-export enum Status {
-	LOADING = 'LOADING',
-	SUCCESS = 'SUCCESS',
-	ERROR = 'ERROR',
+export interface IUserUpdate {
+	id: string
+	body: IUserParams
+}
+
+export interface ILoginParams {
+	username: string
+	password: string
 }

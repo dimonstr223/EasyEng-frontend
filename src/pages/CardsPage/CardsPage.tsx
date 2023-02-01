@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import Card from '../../components/Card/Card'
-import useAppDispatch from '../../hooks/useAppDispatch'
-import useAppSelector from '../../hooks/useAppSelector'
-import { isAuthSelector } from '../../redux/slices/auth/authSlice'
-import { fetchCards } from '../../redux/slices/cards/cardsSlice'
-import { Status } from '../../redux/slices/cards/types'
+import { fetchCards } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
+import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import style from './CardsPage.module.scss'
 
-const CardsPage: React.FC = () => {
-	const navigate = useNavigate()
+const CardsPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
 	const { cards } = useAppSelector(state => state.cards)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		dispatch(fetchCards())
@@ -40,15 +39,6 @@ const CardsPage: React.FC = () => {
 						))}
 				</div>
 			</div>
-			{/* <div className={style.tagsBlock}>
-				<h2 className={style.tagsTitle}>Tags</h2>
-				<div className={style.tags}>
-					<p className={style.tag}>#react</p>
-					<p className={style.tag}>#frontend frontend</p>
-					<p className={style.tag}>#english</p>
-					<p className={style.tag}>#flipcards</p>
-				</div>
-			</div> */}
 		</div>
 	)
 }

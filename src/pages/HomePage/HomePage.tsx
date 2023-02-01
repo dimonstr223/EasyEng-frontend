@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { useAppSelector } from '../../hooks'
+
+import Card from '../../components/Card/Card'
+import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import arrow from '../../assets/img/arrow.svg'
 import birdImage from '../../assets/img/header-logo.svg'
 
-import Card from '../../components/Card/Card'
-import useAppSelector from '../../hooks/useAppSelector'
-import { isAuthSelector } from '../../redux/slices/auth/authSlice'
-
 import style from './HomePage.module.scss'
 
-const HomePage: React.FC = () => {
+const HomePage: FC = () => {
 	const isAuth = useAppSelector(isAuthSelector)
 
 	if (isAuth) {

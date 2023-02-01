@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { Navigate } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from '../../hooks'
 
 import { FormData } from './types'
+import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import style from './LoginPage.module.scss'
-import useAppDispatch from '../../hooks/useAppDispatch'
-import { fetchLogin, isAuthSelector } from '../../redux/slices/auth/authSlice'
-import useAppSelector from '../../hooks/useAppSelector'
-import { Navigate } from 'react-router-dom'
+import { fetchLogin } from '../../redux/auth/asyncThunks/authAsyncThunks'
 
-const LoginPage: React.FC = () => {
+const LoginPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
 

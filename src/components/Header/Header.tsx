@@ -1,15 +1,16 @@
-import React from 'react'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import React, { FC } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+import UserData from '../UserData/UserData'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { isAuthSelector } from '../../redux/auth/slices/authSlice'
+import { fetchLogout } from '../../redux/auth/asyncThunks/authAsyncThunks'
 
 import headerLogo from '../../assets/img/header-logo.svg'
-import useAppDispatch from '../../hooks/useAppDispatch'
-import useAppSelector from '../../hooks/useAppSelector'
-import { fetchLogout, isAuthSelector } from '../../redux/slices/auth/authSlice'
-import UserData from '../UserData/UserData'
 
 import style from './Header.module.scss'
 
-const Header: React.FC = () => {
+const Header: FC = () => {
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
 	const navigate = useNavigate()
@@ -43,7 +44,7 @@ const Header: React.FC = () => {
 						<Link to='/login' className={style.login}>
 							Log in
 						</Link>
-						<Link to='/register' className={style.register}>
+						<Link to='/signup' className={style.register}>
 							Create acc
 						</Link>
 					</>

@@ -14,3 +14,9 @@ export interface ICard {
 export interface IUploadResponse {
 	url: string
 }
+
+export enum Status {
+	LOADING = 'LOADING',
+	SUCCESS = 'SUCCESS',
+	ERROR = 'ERROR',
+}

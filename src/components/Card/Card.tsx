@@ -1,22 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useAppSelector from '../../hooks/useAppSelector'
+
+import { ICardProps } from './types'
+import { useAppDispatch } from '../../hooks'
+import { fetchDelete } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
 
 import editIcon from '../../assets/img/edit-icon.svg'
 import deleteIcon from '../../assets/img/delete-icon.svg'
 
 import style from './Card.module.scss'
-import useAppDispatch from '../../hooks/useAppDispatch'
-import { fetchDelete } from '../../redux/slices/cards/cardsSlice'
 
-interface ICardProps {
-	word: string
-	translation: string
-	imageURL?: string
-	_id: string
-}
-
-const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
+const Card: FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -36,7 +30,6 @@ const Card: React.FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 			dispatch(fetchDelete(_id))
 		}
 	}
-	// const { cards } = useAppSelector(state => state.cards)
 
 	return (
 		<div

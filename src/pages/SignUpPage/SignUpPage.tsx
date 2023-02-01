@@ -1,21 +1,20 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 
 import { Form } from './types'
-import useAppDispatch from '../../hooks/useAppDispatch'
-import useAppSelector from '../../hooks/useAppSelector'
+import { isAuthSelector, setAvatarURL } from '../../redux/auth/slices/authSlice'
 import {
 	fetchSingUp,
 	fetchUploadAva,
-	isAuthSelector,
-	setAvatarURL,
-} from '../../redux/slices/auth/authSlice'
+} from '../../redux/auth/asyncThunks/authAsyncThunks'
 
 import closeIcon from '../../assets/img/close-icon.svg'
-import style from './RegisterPage.module.scss'
-import { useNavigate } from 'react-router-dom'
 
-const RegisterPage: React.FC = () => {
+import style from './SignUpPage.module.scss'
+
+const RegisterPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
 	const { avatarURL } = useAppSelector(state => state.auth)
