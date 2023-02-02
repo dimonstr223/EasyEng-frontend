@@ -13,6 +13,7 @@ const Search = () => {
 
 	useEffect(() => {
 		dispatch(fetchSearch(searchValue))
+
 		if (searchValue === '') {
 			dispatch(fetchCards())
 		}
