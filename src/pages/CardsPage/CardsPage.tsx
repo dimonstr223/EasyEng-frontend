@@ -1,14 +1,16 @@
 import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import Card from '../../components/Card/Card'
+
+import { Status } from '../../types/types'
 import { fetchCards } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
 import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
-import style from './CardsPage.module.scss'
-import { Status } from '../../types/types'
+import Card from '../../components/Card/Card'
 import CardSkeleton from '../../components/Card/CardSkeleton'
+import Search from '../../components/Search/Search'
+
+import style from './CardsPage.module.scss'
 
 const CardsPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -29,7 +31,10 @@ const CardsPage: FC = () => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.cardsBlock}>
-				<h1 className={style.title}>My cards</h1>
+				<div className={style.topWrapper}>
+					<h1 className={style.title}>My cards</h1>
+					<Search />
+				</div>
 				<div className={style.cards}>
 					{loading
 						? [...new Array(8)].map((_, index) => <CardSkeleton />)

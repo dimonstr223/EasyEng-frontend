@@ -9,10 +9,16 @@
 	.cardsBlock {
 		width: 100%;
 
-		.title {
-			color: $orangeAccent;
+		.topWrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			margin-bottom: 40px;
-			font-size: 36px;
+
+			.title {
+				color: $orangeAccent;
+				font-size: 36px;
+			}
 		}
 
 		.cards {
