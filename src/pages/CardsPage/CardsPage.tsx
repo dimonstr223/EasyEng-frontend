@@ -7,12 +7,16 @@ import { fetchCards } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
 import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import style from './CardsPage.module.scss'
+import { Status } from '../../types/types'
+import CardSkeleton from '../../components/Card/CardSkeleton'
 
 const CardsPage: FC = () => {
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
-	const { cards } = useAppSelector(state => state.cards)
+	const { cards, status } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
+
+	const loading = status === Status.LOADING
 
 	useEffect(() => {
 		dispatch(fetchCards())
@@ -27,16 +31,17 @@ const CardsPage: FC = () => {
 			<div className={style.cardsBlock}>
 				<h1 className={style.title}>My cards</h1>
 				<div className={style.cards}>
-					{cards &&
-						cards.map(item => (
-							<Card
-								key={item._id}
-								word={item.word}
-								translation={item.translation}
-								imageURL={item?.imageURL}
-								_id={item._id}
-							/>
-						))}
+					{loading
+						? [...new Array(8)].map((_, index) => <CardSkeleton />)
+						: cards.map(item => (
+								<Card
+									key={item._id}
+									word={item.word}
+									translation={item.translation}
+									imageURL={item?.imageURL}
+									_id={item._id}
+								/>
+						  ))}
 				</div>
 			</div>
 		</div>
