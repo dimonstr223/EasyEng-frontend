@@ -1,3 +1,4 @@
+import { fetchSearch } from './../asyncThunks/cardsAsyncThunks'
 import { createSlice } from '@reduxjs/toolkit'
 
 import {
@@ -107,6 +108,21 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchDelete.rejected, (state, action) => {
 				state.status = Status.ERROR
+			})
+
+			// SEARCH CARDs
+			.addCase(fetchSearch.pending, (state, action) => {
+				state.status = Status.LOADING
+				state.cards = []
+			})
+			.addCase(fetchSearch.fulfilled, (state, action) => {
+				state.status = Status.SUCCESS
+				state.totalCount = action.payload.totalCount
+				state.cards = action.payload.cards
+			})
+			.addCase(fetchSearch.rejected, (state, action) => {
+				state.status = Status.ERROR
+				state.cards = []
 			})
 	},
 })
