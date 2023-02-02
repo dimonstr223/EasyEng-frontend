@@ -2,7 +2,6 @@ $greenAccent: #78c800;
 $orangeAccent: #f49000;
 $redAccent: #ff4e4e;
 $greenHover: #037e3a;
-$greenHover: #003819;
 $greenBG: #012712;
 
 %button {
@@ -25,4 +24,15 @@ $greenBG: #012712;
 	&:hover {
 		opacity: 1;
 	}
+}
+
+%input {
+	padding: 0 10px;
+	font-size: 20px;
+	text-align: center;
+	border: none;
+	border-radius: 10px;
+	width: 100%;
+	height: 40px;
+	letter-spacing: 2px;
 }
