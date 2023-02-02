@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useCallback, useEffect, useState } from 'react'
 import { useAppDispatch } from '../../hooks'
 import debounce from 'lodash.debounce'
 
@@ -9,15 +9,22 @@ import {
 
 import style from './Search.module.scss'
 
-const Search = () => {
+const Search: FC = () => {
 	const dispatch = useAppDispatch()
 	const [searchValue, setSearchValue] = useState('')
 
+	const testDebounce = useCallback(
+		debounce(searchValue => {
+			dispatch(fetchSearch(searchValue))
+		}, 600),
+		[]
+	)
+
 	useEffect(() => {
-		if (searchValue === '') {
+		if (!searchValue) {
 			dispatch(fetchCards())
 		} else {
-			dispatch(fetchSearch(searchValue))
+			testDebounce(searchValue)
 		}
 	}, [searchValue])
 

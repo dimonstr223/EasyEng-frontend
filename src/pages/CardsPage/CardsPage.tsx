@@ -13,16 +13,16 @@ import Search from '../../components/Search/Search'
 import style from './CardsPage.module.scss'
 
 const CardsPage: FC = () => {
-	const dispatch = useAppDispatch()
+	// const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
 	const { cards, status } = useAppSelector(state => state.cards)
 	const navigate = useNavigate()
 
 	const loading = status === Status.LOADING
 
-	useEffect(() => {
-		dispatch(fetchCards())
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(fetchCards()) <- SAME DISPATCH IN SEARCH COMPONENT
+	// }, [])
 
 	if (!isAuth) {
 		navigate('/')
