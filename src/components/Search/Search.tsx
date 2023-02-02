@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch } from '../../hooks'
+import debounce from 'lodash.debounce'
+
 import {
 	fetchCards,
 	fetchSearch,
@@ -12,10 +14,10 @@ const Search = () => {
 	const [searchValue, setSearchValue] = useState('')
 
 	useEffect(() => {
-		dispatch(fetchSearch(searchValue))
-
 		if (searchValue === '') {
 			dispatch(fetchCards())
+		} else {
+			dispatch(fetchSearch(searchValue))
 		}
 	}, [searchValue])
 
