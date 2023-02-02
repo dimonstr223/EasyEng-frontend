@@ -1,19 +1,15 @@
 import axios from '../../axios/axios'
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 
 import avatarDefault from '../../assets/img/avatar-default.png'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import {
-	fetchUpdateUser,
-	fetchUploadAva,
-} from '../../redux/auth/asyncThunks/authAsyncThunks'
+import { fetchUpdateUser } from '../../redux/auth/asyncThunks/authAsyncThunks'
 
 import style from './UserData.module.scss'
-import { Status } from '../../types/types'
 
 const UserData: FC = () => {
 	const dispatch = useAppDispatch()
-	const { me, avatarURL, status } = useAppSelector(state => state.auth)
+	const { me } = useAppSelector(state => state.auth)
 
 	const updateAvatarHandler = async (
 		event: React.ChangeEvent<HTMLInputElement>
@@ -24,7 +20,12 @@ const UserData: FC = () => {
 			formData.append('avatar', file)
 			await axios.post('/auth/upload', formData).then(({ data }) => {
 				if (me) {
-					dispatch(fetchUpdateUser({ id: me?._id, body: { avatar: data.url } }))
+					dispatch(
+						fetchUpdateUser({
+							id: me?._id,
+							body: { avatar: data.url },
+						})
+					)
 				}
 			})
 		}
