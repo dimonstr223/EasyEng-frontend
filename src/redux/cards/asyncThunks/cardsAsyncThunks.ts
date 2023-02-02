@@ -45,3 +45,12 @@ export const fetchDelete = createAsyncThunk<void, string>(
 		return data
 	}
 )
+export const fetchSearch = createAsyncThunk<ICardsResponse, string>(
+	'cards/fetchSearch',
+	async keyWord => {
+		const { data } = await axios.get<ICardsResponse>(
+			`/api/cards/search/${keyWord}`
+		)
+		return data
+	}
+)
