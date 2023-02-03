@@ -14,7 +14,7 @@ import style from './Search.module.scss'
 
 const Search: FC = () => {
 	const dispatch = useAppDispatch()
-	const { searchValue } = useAppSelector(state => state.cards)
+	const { searchValue, currentPage } = useAppSelector(state => state.cards)
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
@@ -26,14 +26,14 @@ const Search: FC = () => {
 
 	const search = useCallback(
 		debounce(searchValue => {
-			dispatch(fetchSearch({ keyWord: searchValue, page: 1 }))
+			dispatch(fetchSearch({ keyWord: searchValue, page: currentPage }))
 		}, 600),
 		[]
 	)
 
 	useEffect(() => {
 		if (!searchValue) {
-			dispatch(fetchCards(1))
+			dispatch(fetchCards(currentPage))
 		} else {
 			search(searchValue)
 		}
