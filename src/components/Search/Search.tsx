@@ -1,11 +1,12 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { useAppDispatch } from '../../hooks'
+import React, { FC, useCallback, useEffect, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from '../../hooks'
 import debounce from 'lodash.debounce'
 
 import {
 	fetchCards,
 	fetchSearch,
 } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
+import { setSearchValue } from '../../redux/cards/slices/cardsSlice'
 
 import searchIcon from '../../assets/img/search-icon.svg'
 
@@ -13,7 +14,8 @@ import style from './Search.module.scss'
 
 const Search: FC = () => {
 	const dispatch = useAppDispatch()
-	const [searchValue, setSearchValue] = useState('')
+	const { searchValue } = useAppSelector(state => state.cards)
+
 	const inputRef = useRef<HTMLInputElement>(null)
 
 	const onSearchClick = () => {
@@ -22,23 +24,23 @@ const Search: FC = () => {
 		}
 	}
 
-	const testDebounce = useCallback(
+	const search = useCallback(
 		debounce(searchValue => {
-			dispatch(fetchSearch(searchValue))
+			dispatch(fetchSearch({ keyWord: searchValue, page: 1 }))
 		}, 600),
 		[]
 	)
 
 	useEffect(() => {
 		if (!searchValue) {
-			dispatch(fetchCards())
+			dispatch(fetchCards(1))
 		} else {
-			testDebounce(searchValue)
+			search(searchValue)
 		}
 	}, [searchValue])
 
 	const onSerachInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchValue(event.target.value)
+		dispatch(setSearchValue(event.target.value))
 	}
 
 	return (

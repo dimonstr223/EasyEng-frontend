@@ -1,12 +1,13 @@
+import { ISearchParams } from './../types/cardsTypes'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from '../../../axios/axios'
 import { ICard, IUploadResponse } from '../../../types/types'
 import { ICardParams, ICardsResponse, IUpdateParams } from '../types/cardsTypes'
 
-export const fetchCards = createAsyncThunk<ICardsResponse>(
+export const fetchCards = createAsyncThunk<ICardsResponse, number>(
 	'cards/fetchCards',
-	async () => {
-		const { data } = await axios.get<ICardsResponse>('/api/cards')
+	async page => {
+		const { data } = await axios.get<ICardsResponse>(`/api/cards?page=${page}`)
 		return data
 	}
 )
@@ -45,11 +46,11 @@ export const fetchDelete = createAsyncThunk<void, string>(
 		return data
 	}
 )
-export const fetchSearch = createAsyncThunk<ICardsResponse, string>(
+export const fetchSearch = createAsyncThunk<ICardsResponse, ISearchParams>(
 	'cards/fetchSearch',
-	async keyWord => {
+	async ({ keyWord, page }) => {
 		const { data } = await axios.get<ICardsResponse>(
-			`/api/cards/search/${keyWord}?page=1&limit=4`
+			`/api/cards/search/${keyWord}?page=${page}`
 		)
 		return data
 	}

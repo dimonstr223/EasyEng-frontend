@@ -1,9 +1,14 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks'
+import ReactPaginate from 'react-paginate'
 
+import { IPage } from './CardPageTypes'
 import { Status } from '../../types/types'
-import { fetchCards } from '../../redux/cards/asyncThunks/cardsAsyncThunks'
+import {
+	fetchCards,
+	fetchSearch,
+} from '../../redux/cards/asyncThunks/cardsAsyncThunks'
 import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import Card from '../../components/Card/Card'
@@ -13,9 +18,10 @@ import Search from '../../components/Search/Search'
 import style from './CardsPage.module.scss'
 
 const CardsPage: FC = () => {
-	// const dispatch = useAppDispatch()
+	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(isAuthSelector)
-	const { cards, status } = useAppSelector(state => state.cards)
+	const { cards, totalCount, searchValue, limit, currentPage, status } =
+		useAppSelector(state => state.cards)
 	const navigate = useNavigate()
 
 	const loading = status === Status.LOADING
@@ -24,10 +30,19 @@ const CardsPage: FC = () => {
 	// 	dispatch(fetchCards()) <- SAME DISPATCH IN SEARCH COMPONENT
 	// }, [])
 
+	const hadleClickPage = async (page: IPage) => {
+		let pageNumber = page.selected + 1
+		if (!searchValue) {
+			dispatch(fetchCards(pageNumber))
+		} else {
+			dispatch(fetchSearch({ keyWord: searchValue, page: pageNumber }))
+		}
+	}
+	const pageCount = Math.ceil(totalCount / limit)
+
 	if (!isAuth) {
 		navigate('/')
 	}
-
 	return (
 		<div className={style.wrapper}>
 			<div className={style.cardsBlock}>
@@ -49,6 +64,22 @@ const CardsPage: FC = () => {
 						  ))}
 				</div>
 			</div>
+			<ReactPaginate
+				pageCount={pageCount}
+				previousLabel={'<'}
+				nextLabel={'>'}
+				breakLabel='...'
+				marginPagesDisplayed={1}
+				pageRangeDisplayed={2}
+				onPageChange={hadleClickPage}
+				forcePage={currentPage - 1}
+				//STYLES
+				containerClassName={style.pagination}
+				pageLinkClassName={style.pageLink}
+				previousLinkClassName={style.pageLink}
+				nextLinkClassName={style.pageLink}
+				activeLinkClassName={style.active}
+			/>
 		</div>
 	)
 }

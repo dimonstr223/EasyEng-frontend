@@ -18,14 +18,23 @@ const initialState: ICardsState = {
 	cards: [],
 	imageURL: '',
 	card: null,
+	searchValue: '',
+	currentPage: 1,
+	limit: 0,
 }
 
 const cardsSlice = createSlice({
 	name: 'cards',
 	initialState,
 	reducers: {
-		setImageURL: (state, { payload }) => {
-			state.imageURL = payload
+		setImageURL: (state, action) => {
+			state.imageURL = action.payload
+		},
+		setSearchValue: (state, action) => {
+			state.searchValue = action.payload
+		},
+		setCurrentPage: (state, action) => {
+			state.currentPage = action.payload
 		},
 	},
 	extraReducers: builder => {
@@ -39,6 +48,8 @@ const cardsSlice = createSlice({
 				state.status = Status.SUCCESS
 				state.cards = action.payload.items
 				state.totalCount = action.payload.totalCount
+				state.currentPage = action.payload.currentPage
+				state.limit = action.payload.limit
 			})
 			.addCase(fetchCards.rejected, (state, action) => {
 				state.status = Status.ERROR
@@ -119,6 +130,8 @@ const cardsSlice = createSlice({
 				state.status = Status.SUCCESS
 				state.totalCount = action.payload.totalCount
 				state.cards = action.payload.items
+				state.currentPage = action.payload.currentPage
+				state.limit = action.payload.limit
 			})
 			.addCase(fetchSearch.rejected, (state, action) => {
 				state.status = Status.ERROR
@@ -127,6 +140,7 @@ const cardsSlice = createSlice({
 	},
 })
 
-export const { setImageURL } = cardsSlice.actions
+export const { setImageURL, setSearchValue, setCurrentPage } =
+	cardsSlice.actions
 
 export default cardsSlice.reducer

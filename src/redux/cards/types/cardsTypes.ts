@@ -20,6 +20,8 @@ export enum Status {
 export interface ICardsResponse {
 	totalCount: number
 	items: ICard[]
+	currentPage: number
+	limit: number
 }
 
 export interface ICardsState {
@@ -28,4 +30,12 @@ export interface ICardsState {
 	cards: ICard[] | []
 	imageURL: string
 	card: ICard | null
+	searchValue: string
+	currentPage: number
+	limit: number
+}
+
+export interface ISearchParams {
+	keyWord: string
+	page: number
 }
