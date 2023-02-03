@@ -19,7 +19,7 @@ export enum Status {
 
 export interface ICardsResponse {
 	totalCount: number
-	cards: ICard[]
+	items: ICard[]
 }
 
 export interface ICardsState {

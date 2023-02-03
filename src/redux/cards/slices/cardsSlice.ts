@@ -37,7 +37,7 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchCards.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.cards = action.payload.cards
+				state.cards = action.payload.items
 				state.totalCount = action.payload.totalCount
 			})
 			.addCase(fetchCards.rejected, (state, action) => {
@@ -110,7 +110,7 @@ const cardsSlice = createSlice({
 				state.status = Status.ERROR
 			})
 
-			// SEARCH CARDs
+			// SEARCH CARDS
 			.addCase(fetchSearch.pending, (state, action) => {
 				state.status = Status.LOADING
 				state.cards = []
@@ -118,7 +118,7 @@ const cardsSlice = createSlice({
 			.addCase(fetchSearch.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
 				state.totalCount = action.payload.totalCount
-				state.cards = action.payload.cards
+				state.cards = action.payload.items
 			})
 			.addCase(fetchSearch.rejected, (state, action) => {
 				state.status = Status.ERROR

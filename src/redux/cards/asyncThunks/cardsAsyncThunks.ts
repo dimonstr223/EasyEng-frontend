@@ -49,7 +49,7 @@ export const fetchSearch = createAsyncThunk<ICardsResponse, string>(
 	'cards/fetchSearch',
 	async keyWord => {
 		const { data } = await axios.get<ICardsResponse>(
-			`/api/cards/search/${keyWord}`
+			`/api/cards/search/${keyWord}?page=1&limit=4`
 		)
 		return data
 	}

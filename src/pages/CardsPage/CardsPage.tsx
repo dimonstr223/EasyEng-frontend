@@ -37,7 +37,7 @@ const CardsPage: FC = () => {
 				</div>
 				<div className={style.cards}>
 					{loading
-						? [...new Array(8)].map((_, index) => <CardSkeleton />)
+						? [...new Array(8)].map((_, index) => <CardSkeleton key={index} />)
 						: cards.map(item => (
 								<Card
 									key={item._id}
