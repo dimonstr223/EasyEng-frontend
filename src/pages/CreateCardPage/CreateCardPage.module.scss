@@ -107,5 +107,14 @@
 			font-size: 38px;
 			margin-bottom: 30px;
 		}
+		.form {
+			.addImage {
+				.imgWrapper {
+					.removeButton {
+						opacity: 1;
+					}
+				}
+			}
+		}
 	}
 }
