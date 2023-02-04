@@ -11,6 +11,7 @@
 	border-radius: 20px;
 	animation: content 0.3s none;
 	align-self: center;
+	margin-bottom: 40px;
 
 	.title {
 		color: $greenAccent;
@@ -49,6 +50,7 @@
 				@extend %button;
 				font-size: 16px;
 				letter-spacing: 2px;
+				height: 100%;
 			}
 
 			.uploadInput {
@@ -91,5 +93,25 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 		letter-spacing: 2px;
+	}
+}
+
+@media (max-width: 500px) {
+	.registerContainer {
+		width: 100%;
+		padding: 20px;
+		.title {
+			font-size: 38px;
+			margin-bottom: 30px;
+		}
+		.form {
+			.uploadAvatar {
+				.avatarWrapper {
+					.removeButton {
+						opacity: 1;
+					}
+				}
+			}
+		}
 	}
 }

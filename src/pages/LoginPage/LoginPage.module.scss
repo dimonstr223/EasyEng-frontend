@@ -11,6 +11,7 @@
 	border-radius: 20px;
 	align-self: center;
 	animation: content 0.3s none;
+	margin-bottom: 40px;
 
 	.title {
 		color: $greenAccent;
@@ -49,5 +50,16 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 		letter-spacing: 2px;
+	}
+}
+
+@media (max-width: 500px) {
+	.loginContainer {
+		width: 100%;
+		padding: 20px;
+		.title {
+			font-size: 38px;
+			margin-bottom: 30px;
+		}
 	}
 }
