@@ -6,6 +6,7 @@ import Card from '../../components/Card/Card'
 import { isAuthSelector } from '../../redux/auth/slices/authSlice'
 
 import arrow from '../../assets/img/arrow.svg'
+import arrowTurn from '../../assets/img/arrow-turn.svg'
 import birdImage from '../../assets/img/header-logo.svg'
 
 import style from './HomePage.module.scss'
@@ -26,10 +27,16 @@ const HomePage: FC = () => {
 			</p>
 			<div className={style.example}>
 				<div className={style.wrapper}>
-					<h2>Click on the card!</h2>
+					<h2 className={style.clickTitle}>Click on the card!</h2>
 					<img
 						className={style.arrowImage}
 						src={arrow}
+						width={70}
+						alt='arrow'
+					/>
+					<img
+						className={style.arrowImageAdaptive}
+						src={arrowTurn}
 						width={70}
 						alt='arrow'
 					/>

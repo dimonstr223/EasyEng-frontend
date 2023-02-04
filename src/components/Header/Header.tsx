@@ -22,18 +22,18 @@ const Header: FC = () => {
 
 	return (
 		<header className={style.header}>
-			<Link to='/'>
-				<div className={style.logo}>
+			<div className={style.logo}>
+				<Link to='/' className={style.logoLink}>
 					<img src={headerLogo} width={60} alt='header logo' />
 					<h3 className={style.title}>EasyLang</h3>
-				</div>
-			</Link>
+				</Link>
+			</div>
 			{isAuth && <UserData />}
 			<div className={style.authButtons}>
 				{isAuth ? (
 					<>
 						<Link className={style.createCard} to={'/create-card'}>
-							Create Card
+							New Card
 						</Link>
 						<button onClick={onLogoutClick} className={style.logout}>
 							Log out

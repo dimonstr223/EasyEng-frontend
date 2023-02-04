@@ -31,13 +31,17 @@
 			align-items: start;
 			height: 100%;
 
-			h2 {
+			.clickTitle {
 				color: $greenAccent;
-				margin-bottom: 20px;
+				font-size: 28px;
 			}
 
 			.arrowImage {
 				transform: scale(1, -1);
+			}
+			.arrowImageAdaptive {
+				height: 70px;
+				display: none;
 			}
 		}
 	}
@@ -46,5 +50,49 @@
 		@extend %button;
 		display: inline-block;
 		margin-bottom: 50px;
+	}
+}
+
+@media (max-width: 800px) {
+	.homepage {
+		.title {
+			text-align: center;
+		}
+		.example {
+			flex-direction: column;
+			align-items: center;
+			gap: 20px;
+			.wrapper {
+				gap: 0;
+				.arrowImage {
+					display: none;
+				}
+				.arrowImageAdaptive {
+					display: block;
+					margin-top: 10px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	.homepage {
+		.title {
+			font-size: 38px;
+		}
+		.text {
+			font-size: 20px;
+		}
+		.example {
+			.wrapper {
+				.clickTitle {
+					font-size: 24px;
+				}
+				.arrowImageAdaptive {
+					height: 50px;
+				}
+			}
+		}
 	}
 }
