@@ -97,3 +97,21 @@
 		letter-spacing: 2px;
 	}
 }
+
+@media (max-width: 500px) {
+	.careateCard {
+		width: 100%;
+		padding: 20px;
+		.title {
+			font-size: 38px;
+			margin-bottom: 30px;
+		}
+		.form {
+			.addImage {
+				.addImageButton {
+					width: 45%;
+				}
+			}
+		}
+	}
+}
