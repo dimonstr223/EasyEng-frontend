@@ -62,7 +62,12 @@ const RegisterPage: FC = () => {
 						className={style.input}
 						style={errors.username && { border: `3px solid #ff4e4e` }}
 						type='text'
-						{...register('username', { required: true, minLength: 3 })}
+						maxLength={15}
+						{...register('username', {
+							required: true,
+							minLength: 3,
+							maxLength: 15,
+						})}
 					/>
 					{errors.username && <div className={style.error}>Enter username</div>}
 				</div>
@@ -72,10 +77,11 @@ const RegisterPage: FC = () => {
 						className={style.input}
 						style={errors.password && { border: `3px solid #ff4e4e` }}
 						type='password'
+						maxLength={15}
 						{...register('password', {
 							required: true,
 							minLength: 4,
-							maxLength: 10,
+							maxLength: 15,
 						})}
 					/>
 					{errors.password && <div className={style.error}>Enter password</div>}
