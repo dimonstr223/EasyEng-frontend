@@ -15,6 +15,7 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			gap: 20px;
 			margin-bottom: 40px;
 
 			.title {
@@ -47,6 +48,19 @@
 		.active {
 			@extend %button;
 			background-color: $greenHover;
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.wrapper {
+		.cardsBlock {
+			.topWrapper {
+				flex-direction: column;
+				.title {
+					font-size: 32px;
+				}
+			}
 		}
 	}
 }

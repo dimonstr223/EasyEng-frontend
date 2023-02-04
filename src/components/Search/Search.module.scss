@@ -26,3 +26,13 @@
 		}
 	}
 }
+
+@media (max-width: 500px) {
+	.search {
+		.serachInput {
+			cursor: text;
+			width: 300px;
+			padding-right: 10px;
+		}
+	}
+}
