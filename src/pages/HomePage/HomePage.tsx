@@ -18,7 +18,7 @@ const HomePage: FC = () => {
 	}
 
 	return (
-		<>
+		<div className={style.homepage}>
 			<h1 className={style.title}>Welcome</h1>
 			<p className={style.text}>
 				to <span>EasyLang</span>. This app will help you learn foreign words.
@@ -41,10 +41,10 @@ const HomePage: FC = () => {
 					imageURL={birdImage}
 				/>
 			</div>
-			<Link to='/register' className={style.getStartButton}>
+			<Link to='/signup' className={style.getStartButton}>
 				Get started
 			</Link>
-		</>
+		</div>
 	)
 }
 

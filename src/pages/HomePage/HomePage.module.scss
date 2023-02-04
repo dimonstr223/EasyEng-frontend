@@ -1,46 +1,50 @@
 @import '../../scss/libs/vars.scss';
 
-.title {
-	font-size: 50px;
-	margin-bottom: 20px;
-	color: $orangeAccent;
-}
+.homepage {
+	animation: content 0.3s none;
 
-.text {
-	font-size: 26px;
-	line-height: 40px;
-	span {
-		color: $greenAccent;
-		font-weight: bold;
+	.title {
+		font-size: 50px;
+		margin-bottom: 20px;
+		color: $orangeAccent;
 	}
-	margin-bottom: 50px;
-}
 
-.example {
-	display: flex;
-	gap: 80px;
-	height: 100%;
-	margin-bottom: 30px;
-
-	.wrapper {
-		display: flex;
-		gap: 20px;
-		align-items: start;
-		height: 100%;
-
-		h2 {
+	.text {
+		font-size: 26px;
+		line-height: 40px;
+		span {
 			color: $greenAccent;
-			margin-bottom: 20px;
+			font-weight: bold;
 		}
+		margin-bottom: 50px;
+	}
 
-		.arrowImage {
-			transform: scale(1, -1);
+	.example {
+		display: flex;
+		gap: 80px;
+		height: 100%;
+		margin-bottom: 30px;
+
+		.wrapper {
+			display: flex;
+			gap: 20px;
+			align-items: start;
+			height: 100%;
+
+			h2 {
+				color: $greenAccent;
+				margin-bottom: 20px;
+			}
+
+			.arrowImage {
+				transform: scale(1, -1);
+			}
 		}
 	}
-}
 
-.getStartButton {
-	@extend %button;
-	display: inline-block;
-	margin-bottom: 50px;
+	.getStartButton {
+		@extend %button;
+		display: inline-block;
+		margin-bottom: 50px;
+	}
 }

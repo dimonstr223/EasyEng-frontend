@@ -17,9 +17,9 @@ import './scss/App.scss'
 const App: React.FC = () => {
 	const dispatch = useAppDispatch()
 
-	useEffect(() => {
-		dispatch(fetchMe())
-	}, [])
+	// useEffect(() => {
+	// 	dispatch(fetchMe())
+	// }, [])
 
 	return (
 		<div className='App'>

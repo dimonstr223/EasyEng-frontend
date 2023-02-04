@@ -26,10 +26,6 @@ const CardsPage: FC = () => {
 
 	const loading = status === Status.LOADING
 
-	// useEffect(() => {
-	// 	dispatch(fetchCards()) <- SAME DISPATCH IN SEARCH COMPONENT
-	// }, [])
-
 	const hadleClickPage = async (page: IPage) => {
 		let pageNumber = page.selected + 1
 		if (!searchValue) {

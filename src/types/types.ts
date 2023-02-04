@@ -20,3 +20,7 @@ export enum Status {
 	SUCCESS = 'SUCCESS',
 	ERROR = 'ERROR',
 }
+
+export interface IToken {
+	accessToken: string
+}

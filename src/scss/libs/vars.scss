@@ -37,3 +37,12 @@ $orangeDark: #ff95007c;
 	height: 40px;
 	letter-spacing: 2px;
 }
+
+@keyframes content {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
