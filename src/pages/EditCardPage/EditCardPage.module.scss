@@ -47,12 +47,13 @@
 			gap: 20px;
 
 			.addImageButton {
+				height: 100%;
 				@extend %button;
 				display: inline-block;
 				font-size: 16px;
 				font-weight: 700;
 				padding: 5px 5px;
-				width: 40%;
+				width: 45%;
 			}
 			.addImageInput {
 				// visibility: hidden;
@@ -95,5 +96,23 @@
 		margin-top: 20px;
 		margin-bottom: 20px;
 		letter-spacing: 2px;
+	}
+}
+
+@media (max-width: 500px) {
+	.editCard {
+		width: 100%;
+		padding: 20px;
+		.title {
+			font-size: 38px;
+			margin-bottom: 30px;
+		}
+		.form {
+			.addImage {
+				.addImageButton {
+					width: 45%;
+				}
+			}
+		}
 	}
 }
