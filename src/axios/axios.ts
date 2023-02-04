@@ -25,6 +25,7 @@ const updateNewAccessToken = (token: string) => {
 instance.interceptors.request.use(
 	config => {
 		config.headers.Authorization = `Bearer ${getLocalAccessToken()}`
+		config.headers.Logout = `Bearer ${getLocalRefreshToken()}`
 		return config
 	},
 	error => Promise.reject(error)
