@@ -52,7 +52,8 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchSingUp.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				localStorage.setItem('token', action.payload.accessToken)
+				localStorage.setItem('accessToken', action.payload.accessToken)
+				localStorage.setItem('refreshToken', action.payload.refreshToken)
 				state.me = action.payload.userData
 			})
 			.addCase(fetchSingUp.rejected, (state, action) => {
