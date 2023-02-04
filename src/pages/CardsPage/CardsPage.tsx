@@ -49,7 +49,7 @@ const CardsPage: FC = () => {
 				<div className={style.cards}>
 					{loading
 						? [...new Array(8)].map((_, index) => <CardSkeleton key={index} />)
-						: cards.map(item => (
+						: cards?.map(item => (
 								<Card
 									key={item._id}
 									word={item.word}
@@ -60,22 +60,27 @@ const CardsPage: FC = () => {
 						  ))}
 				</div>
 			</div>
-			<ReactPaginate
-				pageCount={pageCount}
-				previousLabel={'<'}
-				nextLabel={'>'}
-				breakLabel='...'
-				marginPagesDisplayed={1}
-				pageRangeDisplayed={2}
-				onPageChange={hadleClickPage}
-				forcePage={currentPage - 1}
-				//STYLES
-				containerClassName={style.pagination}
-				pageLinkClassName={style.pageLink}
-				previousLinkClassName={style.pageLink}
-				nextLinkClassName={style.pageLink}
-				activeLinkClassName={style.active}
-			/>
+			{cards ? (
+				<ReactPaginate
+					pageCount={pageCount}
+					previousLabel={'<'}
+					nextLabel={'>'}
+					breakLabel='...'
+					marginPagesDisplayed={1}
+					pageRangeDisplayed={2}
+					onPageChange={hadleClickPage}
+					forcePage={currentPage - 1}
+					renderOnZeroPageCount={() => null}
+					//STYLES
+					containerClassName={style.pagination}
+					pageLinkClassName={style.pageLink}
+					previousLinkClassName={style.pageLink}
+					nextLinkClassName={style.pageLink}
+					activeLinkClassName={style.active}
+				/>
+			) : (
+				<div>NOT FOUND</div>
+			)}
 		</div>
 	)
 }

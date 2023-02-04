@@ -27,7 +27,7 @@ export interface ICardsResponse {
 export interface ICardsState {
 	status: Status
 	totalCount: number
-	cards: ICard[] | []
+	cards: ICard[]
 	imageURL: string
 	card: ICard | null
 	searchValue: string

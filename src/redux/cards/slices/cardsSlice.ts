@@ -90,7 +90,9 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchCreate.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.cards = [...state.cards, action.payload]
+				if (state.cards) {
+					state.cards = [...state.cards, action.payload]
+				}
 				state.imageURL = ''
 			})
 			.addCase(fetchCreate.rejected, (state, action) => {
@@ -115,7 +117,9 @@ const cardsSlice = createSlice({
 			})
 			.addCase(fetchDelete.fulfilled, (state, action) => {
 				state.status = Status.SUCCESS
-				state.cards = state.cards.filter(item => item._id !== action.meta.arg)
+				if (state.cards) {
+					state.cards = state.cards.filter(item => item._id !== action.meta.arg)
+				}
 			})
 			.addCase(fetchDelete.rejected, (state, action) => {
 				state.status = Status.ERROR
