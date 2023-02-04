@@ -4,7 +4,6 @@
 	display: flex;
 	align-items: center;
 	gap: 20px;
-	flex: 1;
 
 	input[type='file'] {
 		display: none;
@@ -23,5 +22,19 @@
 	}
 	.userName {
 		color: $orangeAccent;
+	}
+}
+
+@media (max-width: 800px) {
+	.userData {
+		flex-direction: row-reverse;
+	}
+}
+
+@media (max-width: 600px) {
+	.userData {
+		.userName {
+			display: none;
+		}
 	}
 }

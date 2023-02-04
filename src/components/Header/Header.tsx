@@ -22,34 +22,32 @@ const Header: FC = () => {
 
 	return (
 		<header className={style.header}>
-			<div className={style.logo}>
-				<Link to='/' className={style.logoLink}>
+			<Link to='/'>
+				<div className={style.logo}>
 					<img src={headerLogo} width={60} alt='header logo' />
 					<h3 className={style.title}>EasyLang</h3>
-				</Link>
-			</div>
+				</div>
+			</Link>
 			{isAuth && <UserData />}
-			<div className={style.authButtons}>
-				{isAuth ? (
-					<>
-						<Link className={style.createCard} to={'/create-card'}>
-							New Card
-						</Link>
-						<button onClick={onLogoutClick} className={style.logout}>
-							Log out
-						</button>
-					</>
-				) : (
-					<>
-						<Link to='/login' className={style.login}>
-							Log in
-						</Link>
-						<Link to='/signup' className={style.register}>
-							Create acc
-						</Link>
-					</>
-				)}
-			</div>
+			{isAuth ? (
+				<div className={style.navButtons}>
+					<Link className={style.createCard} to={'/create-card'}>
+						New Card
+					</Link>
+					<button onClick={onLogoutClick} className={style.logout}>
+						Log out
+					</button>
+				</div>
+			) : (
+				<div className={style.authButtons}>
+					<Link to='/login' className={style.login}>
+						Log in
+					</Link>
+					<Link to='/signup' className={style.register}>
+						Sign up
+					</Link>
+				</div>
+			)}
 		</header>
 	)
 }
