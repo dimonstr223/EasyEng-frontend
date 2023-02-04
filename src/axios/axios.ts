@@ -14,8 +14,7 @@ const getLocalRefreshToken = () => {
 	const refreshToken = localStorage.getItem('refreshToken')
 	return refreshToken
 }
-console.log(getLocalRefreshToken())
-console.log(getLocalAccessToken())
+
 const updateNewAccessToken = (token: string) => {
 	let accessToken = getLocalAccessToken()
 	accessToken = token
