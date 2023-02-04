@@ -114,3 +114,11 @@
 		opacity: 1;
 	}
 }
+
+@media (max-width: 800px) {
+	.card {
+		.buttons {
+			visibility: visible;
+		}
+	}
+}
