@@ -16,6 +16,7 @@ import CardSkeleton from '../../components/Card/CardSkeleton'
 import Search from '../../components/Search/Search'
 
 import style from './CardsPage.module.scss'
+import Empty from '../../components/Empty/Empty'
 
 const CardsPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -46,41 +47,43 @@ const CardsPage: FC = () => {
 					<h1 className={style.title}>My cards</h1>
 					<Search />
 				</div>
-				<div className={style.cards}>
-					{loading
-						? [...new Array(8)].map((_, index) => <CardSkeleton key={index} />)
-						: cards?.map(item => (
-								<Card
-									key={item._id}
-									word={item.word}
-									translation={item.translation}
-									imageURL={item?.imageURL}
-									_id={item._id}
-								/>
-						  ))}
-				</div>
+				{cards.length === 0 ? (
+					<Empty />
+				) : (
+					<div className={style.cards}>
+						{loading
+							? [...new Array(8)].map((_, index) => (
+									<CardSkeleton key={index} />
+							  ))
+							: cards?.map(item => (
+									<Card
+										key={item._id}
+										word={item.word}
+										translation={item.translation}
+										imageURL={item?.imageURL}
+										_id={item._id}
+									/>
+							  ))}
+					</div>
+				)}
 			</div>
-			{cards ? (
-				<ReactPaginate
-					pageCount={pageCount}
-					previousLabel={'<'}
-					nextLabel={'>'}
-					breakLabel='...'
-					marginPagesDisplayed={1}
-					pageRangeDisplayed={2}
-					onPageChange={hadleClickPage}
-					forcePage={currentPage - 1}
-					renderOnZeroPageCount={() => null}
-					//STYLES
-					containerClassName={style.pagination}
-					pageLinkClassName={style.pageLink}
-					previousLinkClassName={style.pageLink}
-					nextLinkClassName={style.pageLink}
-					activeLinkClassName={style.active}
-				/>
-			) : (
-				<div>NOT FOUND</div>
-			)}
+			<ReactPaginate
+				pageCount={pageCount}
+				previousLabel={'<'}
+				nextLabel={'>'}
+				breakLabel='...'
+				marginPagesDisplayed={1}
+				pageRangeDisplayed={2}
+				onPageChange={hadleClickPage}
+				forcePage={currentPage - 1}
+				renderOnZeroPageCount={() => null}
+				//STYLES
+				containerClassName={style.pagination}
+				pageLinkClassName={style.pageLink}
+				previousLinkClassName={style.pageLink}
+				nextLinkClassName={style.pageLink}
+				activeLinkClassName={style.active}
+			/>
 		</div>
 	)
 }

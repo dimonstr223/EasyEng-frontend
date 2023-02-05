@@ -1,0 +1,13 @@
+@import '../../scss/libs/vars.scss';
+
+.empty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60vh;
+	animation: content 0.3s none;
+
+	.emptyImage {
+		width: 300px;
+	}
+}
