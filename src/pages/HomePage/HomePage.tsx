@@ -21,6 +21,7 @@ const HomePage: FC = () => {
 	return (
 		<div className={style.homepage}>
 			<h1 className={style.title}>Welcome</h1>
+
 			<p className={style.text}>
 				to <span>EasyLang</span>. This app will help you learn foreign words.
 				Create your own flipcards and enjoy learning!
@@ -51,6 +52,15 @@ const HomePage: FC = () => {
 			<Link to='/signup' className={style.getStartButton}>
 				Get started
 			</Link>
+			<div className={style.testData}>
+				Test Acc:
+				<div className={style.credentials}>
+					<span>Username:</span> test
+				</div>
+				<div className={style.credentials}>
+					<span>Password:</span> 12345
+				</div>
+			</div>
 		</div>
 	)
 }

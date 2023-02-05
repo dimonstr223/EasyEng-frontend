@@ -64,7 +64,8 @@ const Card: FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 							src={
 								_id === '0'
 									? imageURL
-									: `${process.env.REACT_APP_API_URL}${imageURL}`
+									: // : `${process.env.REACT_APP_API_URL}${imageURL}`
+									  `http://localhost:5555${imageURL}`
 							}
 							alt='Illustration'
 						/>

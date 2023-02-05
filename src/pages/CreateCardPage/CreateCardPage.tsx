@@ -89,6 +89,7 @@ const CreateCardPage: FC = () => {
 							<img
 								className={style.image}
 								src={`${process.env.REACT_APP_API_URL}${imageURL}`}
+								// src={`http://localhost:5555${imageURL}`}
 								alt='Illustration'
 							/>
 							<img

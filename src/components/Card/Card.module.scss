@@ -88,13 +88,14 @@
 	gap: 10px;
 
 	.imgWrapper {
-		width: 100%;
+		// width: 100%;
 		animation: content 0.3s none;
 		height: 150px;
 
 		img {
 			height: 100%;
-			object-fit: contain;
+			width: 100%;
+			object-fit: cover;
 			border-radius: 10px;
 		}
 	}

@@ -37,7 +37,8 @@ const UserData: FC = () => {
 				<img
 					src={
 						me?.avatar
-							? `${process.env.REACT_APP_API_URL}${me.avatar}`
+							? // ? `${process.env.REACT_APP_API_URL}${me.avatar}`
+							  `http://localhost:5555${me.avatar}`
 							: avatarDefault
 					}
 					alt='Avatar'

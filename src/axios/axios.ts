@@ -4,6 +4,7 @@ import { IToken } from './../types/types'
 const instance = axios.create({
 	withCredentials: true,
 	baseURL: process.env.REACT_APP_API_URL,
+	// baseURL: `http://localhost:5555`,
 })
 
 const getLocalAccessToken = () => {
