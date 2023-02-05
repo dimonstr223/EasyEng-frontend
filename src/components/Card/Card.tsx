@@ -61,7 +61,11 @@ const Card: FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 				{imageURL && (
 					<div className={style.imgWrapper}>
 						<img
-							src={_id === '0' ? imageURL : `http://localhost:5555${imageURL}`}
+							src={
+								_id === '0'
+									? imageURL
+									: `${process.env.REACT_APP_API_URL}${imageURL}`
+							}
 							alt='Illustration'
 						/>
 					</div>
