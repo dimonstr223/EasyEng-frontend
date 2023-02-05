@@ -47,25 +47,20 @@ const CardsPage: FC = () => {
 					<h1 className={style.title}>My cards</h1>
 					<Search />
 				</div>
-				{cards.length === 0 ? (
-					<Empty />
-				) : (
-					<div className={style.cards}>
-						{loading
-							? [...new Array(8)].map((_, index) => (
-									<CardSkeleton key={index} />
-							  ))
-							: cards?.map(item => (
-									<Card
-										key={item._id}
-										word={item.word}
-										translation={item.translation}
-										imageURL={item?.imageURL}
-										_id={item._id}
-									/>
-							  ))}
-					</div>
-				)}
+
+				<div className={style.cards}>
+					{loading
+						? [...new Array(8)].map((_, index) => <CardSkeleton key={index} />)
+						: cards?.map(item => (
+								<Card
+									key={item._id}
+									word={item.word}
+									translation={item.translation}
+									imageURL={item?.imageURL}
+									_id={item._id}
+								/>
+						  ))}
+				</div>
 			</div>
 			<ReactPaginate
 				pageCount={pageCount}
