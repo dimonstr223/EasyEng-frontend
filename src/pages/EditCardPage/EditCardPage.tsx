@@ -13,6 +13,7 @@ import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './EditCardPage.module.scss'
 import convertBase64 from '../../utils/convertBase64'
+import Compressor from 'compressorjs'
 
 const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -38,8 +39,18 @@ const EditCardPage: FC = () => {
 	) => {
 		if (event.target.files) {
 			const file = event.target.files[0]
-			const image = await convertBase64(file)
-			dispatch(fetchUpload({ image }))
+			new Compressor(file, {
+				maxHeight: 400,
+				maxWidth: 400,
+				success(result) {
+					convertBase64(result).then(image => {
+						dispatch(fetchUpload({ image }))
+					})
+				},
+				error(error) {
+					console.log(error.message)
+				},
+			})
 		}
 	}
 

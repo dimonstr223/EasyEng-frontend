@@ -14,6 +14,7 @@ import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './SignUpPage.module.scss'
 import convertBase64 from '../../utils/convertBase64'
+import Compressor from 'compressorjs'
 
 const RegisterPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -26,8 +27,18 @@ const RegisterPage: FC = () => {
 	) => {
 		if (event.target.files) {
 			const file = event.target.files[0]
-			const image = await convertBase64(file)
-			dispatch(fetchUploadAva({ image }))
+			new Compressor(file, {
+				maxHeight: 400,
+				maxWidth: 400,
+				success(result) {
+					convertBase64(result).then(avatar => {
+						dispatch(fetchUploadAva({ avatar }))
+					})
+				},
+				error(error) {
+					console.log(error.message)
+				},
+			})
 		}
 	}
 

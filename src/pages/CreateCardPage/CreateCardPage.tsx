@@ -37,8 +37,8 @@ const CreateCardPage: FC = () => {
 						dispatch(fetchUpload({ image }))
 					})
 				},
-				error(err) {
-					console.log(err.message)
+				error(error) {
+					console.log(error.message)
 				},
 			})
 		}

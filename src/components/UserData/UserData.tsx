@@ -17,16 +17,26 @@ const UserData: FC = () => {
 	) => {
 		if (event.target.files) {
 			const file = event.target.files[0]
-			const avatar = await convertBase64(file)
-			await axios.post('/auth/upload', { avatar }).then(({ data }) => {
-				if (me) {
-					dispatch(
-						fetchUpdateUser({
-							id: me?._id,
-							body: { avatar: data.url },
+			new Compressor(file, {
+				maxHeight: 400,
+				maxWidth: 400,
+				success(result) {
+					convertBase64(result).then(avatar => {
+						axios.post('/auth/upload', { avatar }).then(({ data }) => {
+							if (me) {
+								dispatch(
+									fetchUpdateUser({
+										id: me?._id,
+										body: { avatar: data.url },
+									})
+								)
+							}
 						})
-					)
-				}
+					})
+				},
+				error(error) {
+					console.log(error.message)
+				},
 			})
 		}
 	}
