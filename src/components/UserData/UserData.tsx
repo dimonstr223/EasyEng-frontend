@@ -17,8 +17,8 @@ const UserData: FC = () => {
 	) => {
 		if (event.target.files) {
 			const file = event.target.files[0]
-			const image = await convertBase64(file)
-			await axios.post('/auth/upload', { image }).then(({ data }) => {
+			const avatar = await convertBase64(file)
+			await axios.post('/auth/upload', { avatar }).then(({ data }) => {
 				if (me) {
 					dispatch(
 						fetchUpdateUser({
