@@ -12,6 +12,8 @@ import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './CreateCardPage.module.scss'
 import convertBase64 from '../../utils/convertBase64'
+import Compressor from 'compressorjs'
+import { error } from 'console'
 
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -26,9 +28,19 @@ const CreateCardPage: FC = () => {
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		if (event.target.files) {
-			const file = event.target.files[0]
-			const image = await convertBase64(file)
-			dispatch(fetchUpload({ image }))
+			const file: File | Blob = event.target.files[0]
+			new Compressor(file, {
+				maxHeight: 400,
+				maxWidth: 400,
+				success(result) {
+					convertBase64(result).then(image => {
+						dispatch(fetchUpload({ image }))
+					})
+				},
+				error(err) {
+					console.log(err.message)
+				},
+			})
 		}
 	}
 
