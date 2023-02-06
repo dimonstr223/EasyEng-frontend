@@ -104,7 +104,7 @@ const RegisterPage: FC = () => {
 						<div className={style.avatarWrapper}>
 							<img
 								className={style.image}
-								src={`${process.env.REACT_APP_API_URL}${avatarURL}`}
+								src={avatarURL}
 								// src={`http://localhost:5555${avatarURL}`}
 								alt='Illustration'
 							/>

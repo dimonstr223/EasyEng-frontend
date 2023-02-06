@@ -34,14 +34,7 @@ const UserData: FC = () => {
 	return (
 		<div className={style.userData}>
 			<label className={style.imageWrapper} htmlFor='upload'>
-				<img
-					src={
-						me?.avatar
-							? `${process.env.REACT_APP_API_URL}${me.avatar}`
-							: avatarDefault
-					}
-					alt='Avatar'
-				/>
+				<img src={me?.avatar ? me.avatar : avatarDefault} alt='Avatar' />
 			</label>
 			<input
 				className={style.up}
