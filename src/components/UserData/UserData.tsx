@@ -7,6 +7,7 @@ import { fetchUpdateUser } from '../../redux/auth/asyncThunks/authAsyncThunks'
 
 import style from './UserData.module.scss'
 import convertBase64 from '../../utils/convertBase64'
+import Compressor from 'compressorjs'
 
 const UserData: FC = () => {
 	const dispatch = useAppDispatch()
