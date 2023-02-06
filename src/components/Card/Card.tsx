@@ -58,11 +58,12 @@ const Card: FC<ICardProps> = ({ word, translation, imageURL, _id, image }) => {
 			</div>
 			<div className={style.front}>
 				<h3 className={style.word}>{word}</h3>
-				{imageURL && (
-					<div className={style.imgWrapper}>
-						<img src={_id === '0' ? image : imageURL} alt='Illustration' />
-					</div>
-				)}
+				{imageURL ||
+					(image && (
+						<div className={style.imgWrapper}>
+							<img src={_id === '0' ? image : imageURL} alt='Illustration' />
+						</div>
+					))}
 			</div>
 		</div>
 	)
