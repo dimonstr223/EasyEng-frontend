@@ -3,5 +3,4 @@ export interface ICardProps {
 	translation: string
 	imageURL?: string
 	_id: string
-	image?: string
 }

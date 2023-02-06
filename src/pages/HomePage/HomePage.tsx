@@ -46,7 +46,7 @@ const HomePage: FC = () => {
 					_id='0'
 					word='Green bird'
 					translation='Зеленая птица'
-					image={birdImage}
+					imageURL={birdImage}
 				/>
 			</div>
 			<Link to='/signup' className={style.getStartButton}>
