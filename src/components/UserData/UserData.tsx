@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks'
 import { fetchUpdateUser } from '../../redux/auth/asyncThunks/authAsyncThunks'
 
 import style from './UserData.module.scss'
+import convertBase64 from '../../utils/convertBase64'
 
 const UserData: FC = () => {
 	const dispatch = useAppDispatch()
@@ -15,10 +16,9 @@ const UserData: FC = () => {
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		if (event.target.files) {
-			const formData = new FormData()
 			const file = event.target.files[0]
-			formData.append('avatar', file)
-			await axios.post('/auth/upload', formData).then(({ data }) => {
+			const image = await convertBase64(file)
+			await axios.post('/auth/upload', image).then(({ data }) => {
 				if (me) {
 					dispatch(
 						fetchUpdateUser({
