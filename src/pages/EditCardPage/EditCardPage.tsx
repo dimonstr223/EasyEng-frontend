@@ -12,6 +12,7 @@ import {
 import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './EditCardPage.module.scss'
+import convertBase64 from '../../utils/convertBase64'
 
 const EditCardPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -36,10 +37,9 @@ const EditCardPage: FC = () => {
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		if (event.target.files) {
-			const formData = new FormData()
 			const file = event.target.files[0]
-			formData.append('image', file)
-			dispatch(fetchUpload(formData))
+			const image = await convertBase64(file)
+			dispatch(fetchUpload({ image }))
 		}
 	}
 

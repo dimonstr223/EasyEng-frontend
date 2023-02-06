@@ -10,7 +10,7 @@ import deleteIcon from '../../assets/img/delete-icon.svg'
 
 import style from './Card.module.scss'
 
-const Card: FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
+const Card: FC<ICardProps> = ({ word, translation, imageURL, _id, image }) => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 
@@ -60,14 +60,7 @@ const Card: FC<ICardProps> = ({ word, translation, imageURL, _id }) => {
 				<h3 className={style.word}>{word}</h3>
 				{imageURL && (
 					<div className={style.imgWrapper}>
-						<img
-							src={
-								_id === '0'
-									? imageURL
-									: `${process.env.REACT_APP_API_URL}${imageURL}`
-							}
-							alt='Illustration'
-						/>
+						<img src={_id === '0' ? image : imageURL} alt='Illustration' />
 					</div>
 				)}
 			</div>

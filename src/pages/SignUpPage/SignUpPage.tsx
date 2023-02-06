@@ -13,6 +13,7 @@ import {
 import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './SignUpPage.module.scss'
+import convertBase64 from '../../utils/convertBase64'
 
 const RegisterPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -20,12 +21,13 @@ const RegisterPage: FC = () => {
 	const { avatarURL } = useAppSelector(state => state.auth)
 	const navigate = useNavigate()
 
-	const avatarUploadHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const avatarUploadHandler = async (
+		event: React.ChangeEvent<HTMLInputElement>
+	) => {
 		if (event.target.files) {
-			const formData = new FormData()
 			const file = event.target.files[0]
-			formData.append('avatar', file)
-			dispatch(fetchUploadAva(formData))
+			const image = await convertBase64(file)
+			dispatch(fetchUploadAva({ image }))
 		}
 	}
 

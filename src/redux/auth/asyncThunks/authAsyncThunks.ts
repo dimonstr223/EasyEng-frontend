@@ -28,10 +28,10 @@ export const fetchMe = createAsyncThunk<IMe>('auth/fetchMe', async () => {
 	const { data } = await axios.get<IMe>('/auth/me')
 	return data
 })
-export const fetchUploadAva = createAsyncThunk<IUploadResponse, FormData>(
+export const fetchUploadAva = createAsyncThunk<IUploadResponse, any>(
 	'auth/fetchUploadAva',
-	async formData => {
-		const { data } = await axios.post<IUploadResponse>('/auth/upload', formData)
+	async image => {
+		const { data } = await axios.post<IUploadResponse>('/auth/upload', image)
 		return data
 	}
 )

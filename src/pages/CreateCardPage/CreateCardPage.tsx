@@ -11,8 +11,7 @@ import { setImageURL } from '../../redux/cards/slices/cardsSlice'
 import closeIcon from '../../assets/img/close-icon.svg'
 
 import style from './CreateCardPage.module.scss'
-import { reject, result } from 'lodash'
-import { error } from 'console'
+import convertBase64 from '../../utils/convertBase64'
 
 const CreateCardPage: FC = () => {
 	const dispatch = useAppDispatch()
@@ -23,29 +22,12 @@ const CreateCardPage: FC = () => {
 	const [word, setWord] = useState('')
 	const [translation, setTranslation] = useState('')
 
-	const convertBase64 = (file: any) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader()
-			fileReader.readAsDataURL(file)
-
-			fileReader.onload = () => {
-				resolve(fileReader.result)
-			}
-			fileReader.onerror = error => {
-				reject(error)
-			}
-		})
-	}
-
 	const handleImageUpload = async (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
 		if (event.target.files) {
 			const file = event.target.files[0]
 			const image = await convertBase64(file)
-			console.log({ image })
-			// const formData = new FormData()
-			// formData.append('image', file)
 			dispatch(fetchUpload({ image }))
 		}
 	}
