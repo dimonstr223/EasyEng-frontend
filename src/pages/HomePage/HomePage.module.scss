@@ -8,22 +8,6 @@
 		margin-bottom: 20px;
 		color: $orangeAccent;
 	}
-	.testData {
-		display: inline-block;
-		padding: 20px;
-		border-radius: 10px;
-		background-color: $greenBG;
-		margin-bottom: 50px;
-		color: $greenAccent;
-		font-size: 24px;
-		.credentials {
-			span {
-				color: $orangeAccent;
-			}
-			color: #fff;
-			font-size: 20px;
-		}
-	}
 
 	.text {
 		font-size: 26px;
@@ -64,10 +48,9 @@
 
 	.getStartButton {
 		@extend %button;
-		display: block;
-		width: 170px;
+		display: inline-block;
 		text-align: center;
-		margin-bottom: 20px;
+		margin-bottom: 50px;
 	}
 }
 
