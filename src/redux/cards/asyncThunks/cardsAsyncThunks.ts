@@ -18,7 +18,10 @@ export const fetchOneCard = createAsyncThunk<ICard, string>(
 		return data
 	}
 )
-export const fetchUpload = createAsyncThunk<IUploadResponse, FormData>(
+interface IUp {
+	image: any
+}
+export const fetchUpload = createAsyncThunk<IUploadResponse, any>(
 	'cards/fetchUpload',
 	async formData => {
 		const { data } = await axios.post<IUploadResponse>('/api/upload', formData)
